@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCouncil | Individual Security Console</title>
+    <meta name="description" content="CyberCouncil Security Console: Access threat analysis, network inspection, and digital forensics modules.">
+    <link rel="icon" type="image/png" href="shield.png" />
+    <link rel="stylesheet" href="css/tool-dashboard.css?v=4">
+</head>
+<body>
+    <div id="root">
+        <!-- Enterprise Static Shell / React Root Target -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+
+                <div class="header-brand">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Client Console</span>
+                    </span>
+                </div>
+            </div>
+
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="dashboard.html" class="nav-item">Overview</a>
+                <a href="tool-dashboard.html" class="nav-item active">Security Modules</a>
+                <a href="reports.html" class="nav-item">Incident Logs</a>
+                <a href="user-cyber-laws.html" class="nav-item">Statutory Laws</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="system-status-indicator" title="All local defensive modules active">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">Modules Online</span>
+                </div>
+
+                <button type="button" class="theme-btn" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+
+                <a href="profile.html" class="user-badge" id="userBadge" title="Account Details">
+                    <div class="user-avatar-circle" id="userInitials">CD</div>
+                    <span id="userName" class="user-name-text">Citizen</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="console-body">
+            <!-- Backdrop -->
+            <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+            <!-- Sidebar -->
+            <aside class="console-sidebar" id="consoleSidebar" aria-label="Module Sidebar">
+                <div class="sidebar-drawer-header">
+                    <div class="drawer-brand">
+                        <div class="brand-shield" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span class="brand-title">CyberCouncil</span>
+                    </div>
+                    <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation drawer">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+
+                <div class="mobile-nav-section">
+                    <div class="sidebar-label">Navigation</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="dashboard.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    <span>Overview</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tool-dashboard.html" class="sidebar-link active">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    <span>Security Modules</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="sidebar-label">Operations</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="dashboard.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    <span>System Status</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tool-dashboard.html" class="sidebar-link active">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    <span>Security Modules</span>
+                                </span>
+                                <span class="sidebar-count-badge">8</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="sidebar-label">Threat Inspection</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="phishing-detection.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                    <span>Phishing Scanner</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="password-checker.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                                    <span>Password Auditor</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="wifi-security.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                                    <span>Network Inspector</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="social-engineering.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/></svg>
+                                    <span>Social Engineering</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="sidebar-label">Digital Forensics</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="malware.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="12" x2="12" y2="15"/></svg>
+                                    <span>Payload Scanner</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="privacy-analyzer.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/></svg>
+                                    <span>Privacy Auditor</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="image-metadata.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                    <span>EXIF Extractor</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="user-ip-display.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                    <span>IP Geolocation</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: auto;">
+                    <div class="sidebar-label">Assistance & Legal</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="user-cyber-laws.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                                    <span>IT Act Sections</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="reports.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    <span>Incident Reports</span>
+                                </span>
+                                <span class="sidebar-count-badge" id="reportCountBadge">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Worksurface -->
+            <main class="console-main">
+                <div class="console-title-row">
+                    <div class="title-meta">
+                        <h1>Individual Security Console</h1>
+                        <p>Execute client-side threat detection, evaluate privacy risks, inspect network parameters, and perform forensic audits.</p>
+                    </div>
+                    <div class="action-row">
+                        <a href="user-cyber-laws.html" class="btn-secondary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                            <span>Statutory Reference</span>
+                        </a>
+                        <a href="reports.html" class="btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                            <span>File Incident Report</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Telemetry Strip -->
+                <div class="telemetry-strip" aria-label="System Telemetry">
+                    <div class="telemetry-card">
+                        <div class="telemetry-info">
+                            <span class="telemetry-label">Active Modules</span>
+                            <span class="telemetry-metric">8 of 8</span>
+                            <span class="telemetry-subtext">Client sandboxed</span>
+                        </div>
+                        <div class="telemetry-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-card">
+                        <div class="telemetry-info">
+                            <span class="telemetry-label">System Posture</span>
+                            <span class="telemetry-metric" style="color: var(--status-green);">Verified</span>
+                            <span class="telemetry-subtext">No open exposures</span>
+                        </div>
+                        <div class="telemetry-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--status-green);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-card">
+                        <div class="telemetry-info">
+                            <span class="telemetry-label">Incident Reports</span>
+                            <span class="telemetry-metric" id="metricReportCount">0</span>
+                            <span class="telemetry-subtext">Saved in local record</span>
+                        </div>
+                        <div class="telemetry-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-card">
+                        <div class="telemetry-info">
+                            <span class="telemetry-label">Execution Environment</span>
+                            <span class="telemetry-metric">React 19 / Vite</span>
+                            <span class="telemetry-subtext">Zero external leaks</span>
+                        </div>
+                        <div class="telemetry-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar: Search & Category Tabs -->
+                <div class="toolbar-container">
+                    <div class="toolbar-top-row">
+                        <div class="search-box-wrapper">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="search-input" id="moduleSearch" placeholder="Filter security modules by name, keyword, or capabilities..." autocomplete="off">
+                        </div>
+                        <div class="toolbar-stats">
+                            Showing <strong id="visibleModulesCount">8</strong> of 8 modules
+                        </div>
+                    </div>
+
+                    <div class="filter-tabs" id="filterTabs" role="tablist">
+                        <button type="button" class="filter-tab active" data-category="all">All Modules</button>
+                        <button type="button" class="filter-tab" data-category="web">Web & Phishing</button>
+                        <button type="button" class="filter-tab" data-category="auth">Identity & Access</button>
+                        <button type="button" class="filter-tab" data-category="network">Network & Connectivity</button>
+                        <button type="button" class="filter-tab" data-category="heuristics">Threat Analysis</button>
+                        <button type="button" class="filter-tab" data-category="forensics">Digital Forensics</button>
+                    </div>
+                </div>
+
+                <!-- Tools Grid -->
+                <div class="tools-grid" id="toolsGrid">
+                    <!-- Tool 1 -->
+                    <article class="tool-card" data-category="web">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Phishing & Domain Scanner</h2>
+                            <p class="tool-description">Inspect suspicious URLs, spoofed domain names, and email headers for fraudulent indicators and credential-harvesting patterns.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Domain Age & Whois</span>
+                                <span class="capability-pill">SSL Certificate Verification</span>
+                                <span class="capability-pill">Redirection Trace</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                                <span>Heuristic & Client Analysis</span>
+                            </span>
+                            <a href="phishing-detection.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 2 -->
+                    <article class="tool-card" data-category="auth">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Password Entropy & Leak Auditor</h2>
+                            <p class="tool-description">Audit credential resilience against offline dictionary attacks, sequential character patterns, and entropy calculations with a local password generator.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Entropy Calculation</span>
+                                <span class="capability-pill">Sequential Dictionary Test</span>
+                                <span class="capability-pill">Client-Side Generator</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>Client-Side Web Crypto</span>
+                            </span>
+                            <a href="password-checker.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 3 -->
+                    <article class="tool-card" data-category="network">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Network & Interface Auditor</h2>
+                            <p class="tool-description">Inspect current client connection properties, test for WebRTC public IP leakage, and evaluate network gateway encryption parameters.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Public IP Exposure</span>
+                                <span class="capability-pill">WebRTC Leak Test</span>
+                                <span class="capability-pill">DNS Resolution Check</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>Browser Network Probe</span>
+                            </span>
+                            <a href="wifi-security.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 4 -->
+                    <article class="tool-card" data-category="heuristics">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Social Engineering Pattern Detector</h2>
+                            <p class="tool-description">Analyze inbound communication text for psychological manipulation tactics including manufactured urgency, authority impersonation, and panic triggers.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Urgency Keyword Analysis</span>
+                                <span class="capability-pill">Authority Pattern Flags</span>
+                                <span class="capability-pill">Targeted Highlights</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>NLP Rule Engine</span>
+                            </span>
+                            <a href="social-engineering.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 5 -->
+                    <article class="tool-card" data-category="heuristics">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Script & Payload Inspector</h2>
+                            <p class="tool-description">Perform static inspection of scripts, HTML, and batch payloads to detect obfuscated eval routines, base64 payloads, and process invocation hooks.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Eval & Exec Detection</span>
+                                <span class="capability-pill">Base64 Payload Flags</span>
+                                <span class="capability-pill">Process Spawn Detection</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>In-Memory Static Parsing</span>
+                            </span>
+                            <a href="malware.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 6 -->
+                    <article class="tool-card" data-category="web">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Website Privacy & Telemetry Auditor</h2>
+                            <p class="tool-description">Evaluate web properties for tracking pixels, third-party advertising scripts, cookie persistence policies, and transport layer security.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Third-Party Script Audit</span>
+                                <span class="capability-pill">Cookie Retention Analysis</span>
+                                <span class="capability-pill">Transport Security</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>Telemetry Scanner</span>
+                            </span>
+                            <a href="privacy-analyzer.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 7 -->
+                    <article class="tool-card" data-category="forensics">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">EXIF & Media Forensics</h2>
+                            <p class="tool-description">Extract exchangeable image file format (EXIF) metadata including camera sensor details, lens specifications, software timestamps, and embedded GPS tags.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Camera & Lens Tags</span>
+                                <span class="capability-pill">Embedded GPS Extraction</span>
+                                <span class="capability-pill">Timestamp Verification</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>Binary Header Parser</span>
+                            </span>
+                            <a href="image-metadata.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Tool 8 -->
+                    <article class="tool-card" data-category="network">
+                        <div class="card-top">
+                            <div class="card-header-row">
+                                <div class="tool-icon-wrapper">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                </div>
+                                <span class="tool-status-badge">
+                                    <span class="status-badge-dot"></span>
+                                    <span>Operational</span>
+                                </span>
+                            </div>
+                            <h2 class="tool-name">Public IP & Geolocation Trace</h2>
+                            <p class="tool-description">Identify public routing IP address, verify Autonomous System Number (ASN), determine internet service provider routing, and plot location coordinates.</p>
+                            <div class="capabilities-list">
+                                <span class="capability-pill">Public IPv4/IPv6</span>
+                                <span class="capability-pill">ISP & ASN Query</span>
+                                <span class="capability-pill">Geographic Coordinates</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="execution-type">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>Network API & Map</span>
+                            </span>
+                            <a href="user-ip-display.html" class="open-tool-btn">
+                                <span>Launch Module</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Incident Escalation Strip -->
+                <section class="incident-banner">
+                    <div class="incident-banner-text">
+                        <h4>Encountered a cybercrime, financial fraud, or unauthorized compromise?</h4>
+                        <p>Submit a formal digital complaint with structured evidence under provisions of the Indian IT Act.</p>
+                    </div>
+                    <div class="incident-banner-actions">
+                        <a href="reports.html" class="btn-primary">
+                            File Incident Report
+                        </a>
+                        <a href="user-cyber-laws.html" class="btn-secondary">
+                            View Penal Sections
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Interactive Controller -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+            const themeBtn = document.getElementById('themeToggleBtn');
+            const searchInput = document.getElementById('moduleSearch');
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const cards = document.querySelectorAll('.tool-card');
+            const countLabel = document.getElementById('visibleModulesCount');
+            const reportBadge = document.getElementById('reportCountBadge');
+            const metricReport = document.getElementById('metricReportCount');
+            const userInitials = document.getElementById('userInitials');
+            const userName = document.getElementById('userName');
+
+            // Mobile Drawer Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+            const sidebar = document.getElementById('consoleSidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+
+            function toggleDrawer(open) {
+                if (!sidebar) return;
+                const isOpen = open !== undefined ? open : !sidebar.classList.contains('open');
+                if (isOpen) {
+                    sidebar.classList.add('open');
+                    if (backdrop) backdrop.classList.add('active');
+                    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    sidebar.classList.remove('open');
+                    if (backdrop) backdrop.classList.remove('active');
+                    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => toggleDrawer());
+            if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', () => toggleDrawer(false));
+            if (backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900 && sidebar && sidebar.classList.contains('open')) {
+                    toggleDrawer(false);
+                }
+            });
+
+            // Theme Management
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+
+            themeBtn.addEventListener('click', () => {
+                const current = html.getAttribute('data-theme') || 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+
+            // User Info & Reports Count
+            const storedName = localStorage.getItem('fullname') || localStorage.getItem('email');
+            if (storedName) {
+                const name = storedName.includes('@') ? storedName.split('@')[0] : storedName;
+                userName.textContent = name;
+                userInitials.textContent = name.substring(0, 2).toUpperCase();
+            }
+
+            try {
+                const reports = JSON.parse(localStorage.getItem('cyberReports') || '[]');
+                if (reportBadge) reportBadge.textContent = reports.length;
+                if (metricReport) metricReport.textContent = reports.length;
+            } catch (e) {}
+
+            // Search and Category Filter
+            let activeCategory = 'all';
+            let query = '';
+
+            function updateFilter() {
+                let visible = 0;
+                cards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    const text = card.textContent.toLowerCase();
+                    const matchesCat = activeCategory === 'all' || cat === activeCategory;
+                    const matchesQuery = !query || text.includes(query);
+
+                    if (matchesCat && matchesQuery) {
+                        card.style.display = 'flex';
+                        visible++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                countLabel.textContent = visible;
+            }
+
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    activeCategory = tab.getAttribute('data-category');
+                    updateFilter();
+                });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                query = e.target.value.toLowerCase().trim();
+                updateFilter();
+            });
+        });
+    </script>
+    <!-- React Entry Point for Vite -->
+    <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

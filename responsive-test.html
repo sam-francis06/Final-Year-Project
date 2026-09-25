@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberCouncil Responsive Viewport Tester</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0b0f19;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .test-header {
+      background: #111827;
+      border-bottom: 1px solid #1f2937;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .test-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .viewport-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: #1f2937;
+      color: #9ca3af;
+      border: 1px solid #374151;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      background: #374151;
+      color: #f9fafb;
+    }
+
+    .tab-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+
+    .frame-container {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px;
+      overflow: auto;
+      background: #030712;
+    }
+
+    .device-mockup {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: width 0.25s ease, height 0.25s ease;
+    }
+
+    .device-bar {
+      background: #111827;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #374151;
+    }
+
+    .device-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ef4444; }
+    .dot.yellow { background: #f59e0b; }
+    .dot.green { background: #10b981; }
+
+    iframe {
+      border: none;
+      background: #ffffff;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header class="test-header">
+    <div class="test-title">
+      <span>🛡️</span> CyberCouncil Responsive Visual Verification Suite
+    </div>
+    <div class="viewport-tabs">
+      <button class="tab-btn" id="btnDesktop" onclick="setDevice(1280, 850, 'Desktop 1280px (100% Zoom 1.2x Density)')">
+        🖥️ Desktop (1280px)
+      </button>
+      <button class="tab-btn" id="btnTablet" onclick="setDevice(768, 1024, 'Tablet 768px (iPad Mini / Portrait)')">
+        📱 Tablet (768px)
+      </button>
+      <button class="tab-btn" id="btnMobile" onclick="setDevice(375, 740, 'Mobile 375px (iPhone Viewport)')">
+        📱 Mobile (375px)
+      </button>
+      <button class="tab-btn" id="btnSmallMobile" onclick="setDevice(320, 680, 'Small Mobile 320px (Compact)')">
+        📲 Small (320px)
+      </button>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="tab-btn" id="btnToggleDrawer" onclick="toggleIframeDrawer()">
+        ☰ Toggle Drawer
+      </button>
+      <button class="tab-btn" id="btnToggleTheme" onclick="toggleIframeTheme()">
+        🌙 Toggle Theme
+      </button>
+      <button class="tab-btn" id="btnScrollCards" onclick="scrollIframeCards()">
+        ⬇️ View Cards
+      </button>
+      <button class="tab-btn" id="btnScrollTop" onclick="scrollIframeTop()">
+        ⬆️ Top
+      </button>
+    </div>
+  </header>
+
+  <main class="frame-container">
+    <div class="device-mockup" id="deviceMockup" style="width: 1280px; height: 850px;">
+      <div class="device-bar">
+        <div class="device-dots">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div id="deviceLabel">Desktop 1280px (100% Zoom 1.2x Density)</div>
+        <div id="deviceDims">1280 × 850</div>
+      </div>
+      <iframe id="previewFrame" src="/tool-dashboard.html" onload="checkOverflow()"></iframe>
+    </div>
+    <div id="overflowReport" style="margin-top: 15px; color: #f87171; font-size: 13px; text-align: center;"></div>
+  </main>
+
+  <script>
+    function checkOverflow() {
+      try {
+        const frame = document.getElementById('previewFrame');
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        if (!doc || !doc.body) return;
+        
+        // Reset horizontal scroll
+        doc.documentElement.scrollLeft = 0;
+        doc.body.scrollLeft = 0;
+        if (frame.contentWindow) frame.contentWindow.scrollTo(0, 0);
+
+        const bodyWidth = doc.documentElement.clientWidth;
+        const scrollWidth = doc.documentElement.scrollWidth;
+        const report = document.getElementById('overflowReport');
+        
+        let mainChildren = [];
+        if (main) {
+          Array.from(main.children).forEach(ch => {
+            const name = typeof ch.className === 'string' ? ch.className : ch.tagName;
+            mainChildren.push(name + ': w=' + ch.offsetWidth + ' sw=' + ch.scrollWidth);
+          });
+        }
+        let actInfo = ' [' + mainChildren.join(' | ') + ']';
+
+        if (scrollWidth > bodyWidth + 2) {
+          report.style.color = '#f87171';
+          report.textContent = '⚠️ Overflow! Doc: ' + bodyWidth + 'px, Scroll: ' + scrollWidth + 'px.' + actInfo;
+        } else {
+          report.style.color = '#34d399';
+          report.textContent = '✅ Zero overflow! Viewport: ' + bodyWidth + 'px.' + actInfo;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function setDevice(w, h, label) {
+      const mockup = document.getElementById('deviceMockup');
+      mockup.style.width = w + 'px';
+      mockup.style.height = h + 'px';
+      document.getElementById('deviceLabel').textContent = label;
+      document.getElementById('deviceDims').textContent = w + ' × ' + h;
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      if (w === 1280) document.getElementById('btnDesktop').classList.add('active');
+      else if (w === 768) document.getElementById('btnTablet').classList.add('active');
+      else if (w === 375) document.getElementById('btnMobile').classList.add('active');
+      else if (w === 320) document.getElementById('btnSmallMobile').classList.add('active');
+
+      setTimeout(checkOverflow, 400);
+    }
+
+    function toggleIframeDrawer() {
+      try {
+        const frame = document.getElementById('previewFrame');
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        // In React or fallback, click the mobile menu button or close button
+        const closeBtn = doc.querySelector('.drawer-close-btn');
+        const menuBtn = doc.querySelector('.mobile-menu-btn');
+        const sidebar = doc.querySelector('.console-sidebar');
+        if (sidebar && sidebar.classList.contains('open') && closeBtn) {
+          closeBtn.click();
+        } else if (menuBtn) {
+          menuBtn.click();
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function toggleIframeTheme() {
+      try {
+        const frame = document.getElementById('previewFrame');
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        const themeBtn = doc.querySelector('.theme-btn') || doc.getElementById('themeToggleBtn');
+        if (themeBtn) themeBtn.click();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function scrollIframeCards() {
+      try {
+        const frame = document.getElementById('previewFrame');
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        const grid = doc.querySelector('.tools-grid');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function scrollIframeTop() {
+      try {
+        const frame = document.getElementById('previewFrame');
+        const win = frame.contentWindow;
+        if (win) win.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Default to Desktop
+    setDevice(1280, 850, 'Desktop 1280px (100% Zoom 1.2x Density)');
+  </script>
+</body>
+</html>
