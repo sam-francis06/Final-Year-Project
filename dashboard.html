@@ -1,150 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Council</title>
+    <title>CyberCouncil - Citizen Cybersecurity &amp; Incident Response Platform</title>
     <link rel="icon" type="image/png" href="shield.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/tool-dashboard.css">
 </head>
 <body>
-    <nav class="top-nav">
-        <button class="mobile-menu-button">
-            <i class="ph ph-list"></i>
-        </button>
-        <div class="nav-left">
-            <div class="logo">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <span>Cyber Council</span>
-            </div>
-        </div>
-        <div class="nav-right">
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="tool-dashboard.html" class="nav-link">Tools</a>
-            <a href="reports.html" class="nav-link">Reports</a>
-            <a href="user-cyber-laws.html" class="nav-link">Cyber Laws</a>
-            <a href="profile.html" class="user-profile">
-                <i class="ph ph-user"></i>
-            </a>
-            <button class="home-icon">
-                <i class="ph ph-house-line"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div class="mobile-dropdown">
-        <a href="dashboard.html" class="mobile-nav-link">
-            <i class="ph ph-gauge"></i>
-            Dashboard
-        </a>
-        <a href="tool-dashboard.html" class="mobile-nav-link">
-            <i class="ph ph-wrench"></i>
-            Tools
-        </a>
-        <a href="reports.html" class="mobile-nav-link">
-            <i class="ph ph-chart-pie-slice"></i>
-            Reports
-        </a>
-        <a href="user-cyber-laws.html" class="mobile-nav-link">
-            <i class="ph ph-gavel"></i>
-            Cyber Laws
-        </a>
-        <a href="profile.html" class="mobile-nav-link">
-            <i class="ph ph-user"></i>
-            Profile
-        </a>
-    </div>
-
-    <div class="container">
-        <main class="main-content">
-            <div class="header">
-                <h1>Welcome to Your Dashboard</h1>
-                <p>Monitor your cybersecurity status and access quick actions</p>
+    <div id="root">
+        <!-- Static shell / Fallback while React hydrates -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <a href="dashboard.html" class="header-brand" style="text-decoration: none; color: inherit;">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Client Console</span>
+                    </span>
+                </a>
             </div>
 
-            <div class="quick-actions">
-                <div class="action-card">
-                    <div class="action-icon">
-                        <i class="ph ph-book-open"></i>
-                    </div>
-                    <div class="action-content">
-                        <h3>Learn About Cyber Laws</h3>
-                        <p>Access easy-to-understand explanations of cyber laws and your rights.</p>
-                        <a href="#" class="action-button">Learn More</a>
-                    </div>
-                </div>
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="dashboard.html" class="nav-item active">Overview</a>
+                <a href="tool-dashboard.html" class="nav-item">Security Modules</a>
+                <a href="incident-logs.html" class="nav-item">Incident Logs</a>
+                <a href="user-cyber-laws.html" class="nav-item">Statutory Laws</a>
+            </nav>
 
-                <div class="action-card">
-                    <div class="action-icon">
-                        <i class="ph ph-warning"></i>
-                    </div>
-                    <div class="action-content">
-                        <h3>Report Incidents</h3>
-                        <p>Report cybercrime incidents and track your case status.</p>
-                        <a href="#" class="action-button">New Report</a>
-                    </div>
-                </div>
-
-                <div class="action-card">
-                    <div class="action-icon">
-                        <i class="ph ph-chats"></i>
-                    </div>
-                    <div class="action-content">
-                        <h3>Get Support</h3>
-                        <p>Connect with our AI assistant for personalized guidance.</p>
-                        <a href="#" class="action-button">Start Chat</a>
-                    </div>
+            <div class="header-actions">
+                <div class="system-status-indicator" title="System Operational">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">Shield Active</span>
                 </div>
             </div>
+        </header>
 
-            <div class="header">
-                <h2>Recent Updates</h2>
-            </div>
-
-            <div class="updates-grid">
-                <div class="update-card">
-                    <div class="update-icon">
-                        <i class="ph ph-shield"></i>
-                    </div>
-                    <div class="update-content">
-                        <h3>New Cybersecurity Guidelines</h3>
-                        <p>Updated guidelines for protecting personal data online.</p>
-                        <a href="#" class="update-link">Read More</a>
-                    </div>
-                </div>
-
-                <div class="update-card">
-                    <div class="update-icon">
-                        <i class="ph ph-shield-check"></i>
-                    </div>
-                    <div class="update-content">
-                        <h3>Online Safety Tips</h3>
-                        <p>Latest recommendations for staying safe in the digital world.</p>
-                        <a href="#" class="update-link">View Tips</a>
-                    </div>
-                </div>
-
-                <div class="update-card">
-                    <div class="update-icon">
-                        <i class="ph ph-file-text"></i>
-                    </div>
-                    <div class="update-content">
-                        <h3>Reporting Process Update</h3>
-                        <p>Streamlined process for reporting cyber incidents.</p>
-                        <a href="#" class="update-link">Learn More</a>
-                    </div>
-                </div>
+        <main class="console-main overview-page-main" style="width: 100%; max-width: 100%; margin: 0; padding: 24px 28px; box-sizing: border-box;">
+            <div style="text-align: center; padding: 48px 24px; color: var(--text-secondary);">
+                <p>Loading CyberCouncil Overview workspace...</p>
             </div>
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/auth-check.js"></script>
-    <script src="js/dashboard.js"></script>
+    <!-- Standalone Overview React Entry Point -->
+    <script type="module" src="/src/dashboard.jsx"></script>
 </body>
 </html>

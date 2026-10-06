@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCouncil - Incident Logs & Reporting</title>
+    <link rel="icon" type="image/png" href="shield.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tool-dashboard.css">
+</head>
+<body>
+    <div id="root">
+        <!-- Static shell / Fallback while React hydrates -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <a href="dashboard.html" class="header-brand" style="text-decoration: none; color: inherit;">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Client Console</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="dashboard.html" class="nav-item">Overview</a>
+                <a href="tool-dashboard.html" class="nav-item">Security Modules</a>
+                <a href="incident-logs.html" class="nav-item active">Incident Logs</a>
+                <a href="user-cyber-laws.html" class="nav-item">Statutory Laws</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="system-status-indicator" title="Incident Logging Active">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">Logs Vault Online</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="console-main ir-page-main" style="width: 100%; max-width: 100%; margin: 0; padding: 24px 28px; box-sizing: border-box;">
+            <div style="text-align: center; padding: 48px 24px; color: var(--text-secondary);">
+                <p>Loading Incident Logs & Reporting workspace...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Standalone Incident Logs React Entry Point -->
+    <script type="module" src="/src/incident-logs.jsx"></script>
+</body>
+</html>

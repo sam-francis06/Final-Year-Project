@@ -1,142 +1,665 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Council</title>
+    <title>CyberCouncil | Police Dashboard</title>
+    <meta name="description" content="CyberCouncil Police Console: Cybercrime investigation and case monitoring console with geographic crime hotspot mapping and operational case analytics.">
     <link rel="icon" type="image/png" href="shield.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/police-dashboard.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://unpkg.com/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <link rel="stylesheet" href="css/tool-dashboard.css?v=4">
+    <link rel="stylesheet" href="css/police-tool-dashboard.css?v=4">
+    <link rel="stylesheet" href="css/case-management.css?v=2">
+    <!-- Leaflet Map CSS for Hotspot Mapping -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="css/police-dashboard.css?v=3">
+    <style>
+        /* Standalone Full-Width Police Dashboard Layout (No Sidebar Offset) */
+        body.police-dashboard-page {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .police-dashboard-container {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-height: calc(100vh - 68px);
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .police-dashboard-main {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+            flex: none !important;
+        }
+
+        .police-dashboard-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 24px 28px 48px !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Mobile Drawer: Off-canvas only, completely excluded from desktop layout flow */
+        .mobile-drawer-sidebar,
+        #consoleSidebar {
+            display: none !important;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-drawer-sidebar,
+            #consoleSidebar {
+                display: flex !important;
+                position: fixed !important;
+                top: 0 !important;
+                left: -320px !important;
+                width: 288px !important;
+                height: 100vh !important;
+                z-index: 1000 !important;
+                background: var(--bg-surface, #ffffff) !important;
+                box-shadow: 2px 0 16px rgba(0, 0, 0, 0.25) !important;
+                transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                flex-direction: column;
+                padding: 24px 15px;
+                gap: 24px;
+                overflow-y: auto;
+            }
+
+            .mobile-drawer-sidebar.open,
+            .mobile-drawer-sidebar.mobile-open,
+            #consoleSidebar.open,
+            #consoleSidebar.mobile-open {
+                left: 0 !important;
+            }
+
+            .police-dashboard-layout {
+                padding: 16px 14px 40px !important;
+            }
+        }
+    </style>
 </head>
-<body>
-    <nav class="top-nav">
-        <div class="nav-left">
-          <div class="logo">
-            <i data-lucide="shield"></i>
-            <span>Cyber Council</span>
-          </div>
+<body class="police-dashboard-page">
+    <div id="root">
+        <!-- Top Console Header (Consistent Police Navigation) -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+
+                <div class="header-brand">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Police Console</span>
+                    </span>
+                </div>
+            </div>
+
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="police-dashboard.html" class="nav-item active">Dashboard</a>
+                <a href="case-management.html" class="nav-item">Case Management</a>
+                <a href="police-tool-dashboard.html" class="nav-item">Tools</a>
+                <a href="police-cyber-laws.html" class="nav-item">Cyber Laws</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="system-status-indicator" title="Police department investigative nodes active">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">Console Online</span>
+                </div>
+
+                <button type="button" class="theme-btn" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
+                    <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+
+                <a href="police-profile.html" class="user-badge" id="userBadge" title="Officer Profile">
+                    <div class="user-avatar-circle" id="userInitials">PD</div>
+                    <span id="userName" class="user-name-text">Officer</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="police-dashboard-container">
+            <!-- Sidebar Drawer Backdrop -->
+            <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+            <!-- Mobile Navigation Drawer (Off-canvas only) -->
+            <aside class="mobile-drawer-sidebar" id="consoleSidebar" aria-label="Police Navigation Drawer">
+                <div class="sidebar-drawer-header">
+                    <div class="drawer-brand">
+                        <div class="brand-shield" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span class="brand-title">CyberCouncil <span class="brand-badge" style="font-size: 11px;">Police</span></span>
+                    </div>
+                    <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation drawer">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+
+                <div class="mobile-nav-section">
+                    <div class="sidebar-label">Navigation</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="police-dashboard.html" class="sidebar-link active">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    <span>Dashboard</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="case-management.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                    <span>Case Management</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-tool-dashboard.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    <span>Tools</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-cyber-laws.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                    <span>Cyber Laws</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-profile.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <span>Profile</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Dashboard Content -->
+            <main class="police-dashboard-main" id="consoleMain">
+                <div class="police-dashboard-layout">
+                    
+                    <!-- 1. Page Header & Demo Status -->
+                    <div class="case-mgmt-header">
+                        <div class="case-header-top">
+                            <div class="case-header-titles">
+                                <div class="case-category-tag">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    <span>POLICE DEPARTMENT INVESTIGATION MODULE</span>
+                                </div>
+                                <h1 class="case-page-title">Police Dashboard</h1>
+                                <p class="case-page-subtitle">Cybercrime investigation and case monitoring console</p>
+                            </div>
+
+                            <div class="header-badges-cluster">
+                                <div class="clock-display-pill" id="clockDisplayPill">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <span id="liveClockDisplay">28 Sep 2026 | 06:15 IST</span>
+                                </div>
+                                <div class="demo-status-pill">
+                                    <span class="demo-status-dot"></span>
+                                    <span>DEMO DATA — INTEGRATION PENDING</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12. Demo Data Notice Banner -->
+                        <div class="case-demo-notice-banner" role="alert">
+                            <div class="notice-icon-wrap">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            </div>
+                            <div class="notice-text-content">
+                                <strong>Demo Environment</strong> — Case and activity information shown on this dashboard is derived from fictional sample cases used by the Case Management module. Database and backend integration will be implemented in the next development phase.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Welcome / Operational Banner -->
+                    <section class="ops-banner" aria-label="Operational Banner">
+                        <div class="ops-banner-content">
+                            <div class="ops-banner-title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <span>Police Investigation Console</span>
+                            </div>
+                            <p class="ops-banner-desc">
+                                Monitor reported cybercrime cases, review investigation activity, analyze geographic crime patterns, and access digital investigation tools.
+                            </p>
+                        </div>
+                        <div class="ops-banner-actions">
+                            <a href="case-management.html" class="ops-btn-primary">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                <span>View Cases</span>
+                            </a>
+                            <a href="police-tool-dashboard.html" class="ops-btn-secondary">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                <span>Investigation Tools</span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- 3. Case Statistics Row (Dynamically Calculated from Shared Dataset) -->
+                    <section class="case-stats-grid" aria-label="Case Overview Statistics">
+                        <div class="stat-metric-card" title="Total reported cases in system">
+                            <div class="stat-icon-box total">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <div class="stat-metric-details">
+                                <span class="stat-metric-label">Total Cases</span>
+                                <span class="stat-metric-val" id="statTotalCases">0</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-metric-card" title="New cases awaiting assignment">
+                            <div class="stat-icon-box new">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <div class="stat-metric-details">
+                                <span class="stat-metric-label">New Reports</span>
+                                <span class="stat-metric-val" id="statNewCases">0</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-metric-card" title="Active investigation dossiers">
+                            <div class="stat-icon-box investigation">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            </div>
+                            <div class="stat-metric-details">
+                                <span class="stat-metric-label">Under Investigation</span>
+                                <span class="stat-metric-val" id="statInvestigatingCases">0</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-metric-card" title="Cases pending external reports or audit">
+                            <div class="stat-icon-box pending">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="stat-metric-details">
+                                <span class="stat-metric-label">Pending</span>
+                                <span class="stat-metric-val" id="statPendingCases">0</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-metric-card" title="Concluded and resolved cases">
+                            <div class="stat-icon-box closed">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <div class="stat-metric-details">
+                                <span class="stat-metric-label">Closed</span>
+                                <span class="stat-metric-val" id="statClosedCases">0</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 4. Crime Hotspot Mapping (MAJOR COMPONENT) -->
+                    <section class="hotspot-section-card" aria-label="Crime Hotspot Mapping">
+                        <div class="hotspot-header">
+                            <div class="hotspot-title-wrap">
+                                <div class="case-category-tag" style="background: rgba(234, 88, 12, 0.1); color: #ea580c; border-color: rgba(234, 88, 12, 0.25);">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                                    <span>GEOGRAPHIC CRIME DISTRIBUTION</span>
+                                </div>
+                                <h2 class="hotspot-section-title">Crime Hotspot Mapping</h2>
+                                <p class="hotspot-section-subtitle">Geographic distribution of reported cybercrime cases across jurisdiction zones</p>
+                            </div>
+
+                            <div class="header-badges-cluster">
+                                <span class="demo-status-pill">
+                                    <span class="demo-status-dot"></span>
+                                    <span>DEMO DATA</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Hotspot Filters Bar -->
+                        <div class="hotspot-filter-bar">
+                            <div class="filter-inputs-group">
+                                <div class="filter-field">
+                                    <label class="filter-label" for="filterIncidentType">Incident Type:</label>
+                                    <select class="filter-select" id="filterIncidentType">
+                                        <option value="All">All Incidents</option>
+                                        <option value="Phishing / Scam">Phishing / Scam</option>
+                                        <option value="Online Financial Fraud">Online Financial Fraud</option>
+                                        <option value="Account Compromise">Account Compromise</option>
+                                        <option value="Identity Theft">Identity Theft</option>
+                                        <option value="Malware / Suspicious File">Malware / Suspicious File</option>
+                                        <option value="Data / Privacy Exposure">Data / Privacy Exposure</option>
+                                        <option value="Unauthorized Access">Unauthorized Access</option>
+                                        <option value="Cyberbullying / Harassment">Cyberbullying / Harassment</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-field">
+                                    <label class="filter-label" for="filterPriority">Priority:</label>
+                                    <select class="filter-select" id="filterPriority">
+                                        <option value="All">All Priorities</option>
+                                        <option value="Critical">Critical</option>
+                                        <option value="High">High</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-field">
+                                    <label class="filter-label" for="filterTimePeriod">Time Period:</label>
+                                    <select class="filter-select" id="filterTimePeriod">
+                                        <option value="All">All Records</option>
+                                        <option value="Today">Today</option>
+                                        <option value="Last 7 Days">Last 7 Days</option>
+                                        <option value="Last 30 Days">Last 30 Days</option>
+                                    </select>
+                                </div>
+
+                                <button type="button" class="btn-reset-filters" id="btnResetFilters" title="Reset all hotspot filters">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                                    <span>Reset Filters</span>
+                                </button>
+                            </div>
+
+                            <div class="filter-summary-pill" id="filterSummaryPill">
+                                Showing 12 cases across 6 hotspot zones
+                            </div>
+                        </div>
+
+                        <!-- Map & Inspector Grid -->
+                        <div class="hotspot-map-grid">
+                            <div class="map-container-wrap">
+                                <div id="hotspotMap"></div>
+
+                                <!-- Map Overlay Legend -->
+                                <div class="map-legend-overlay">
+                                    <div class="map-legend-title">
+                                        <span>Hotspot Intensity Legend</span>
+                                    </div>
+                                    <div class="map-legend-items">
+                                        <div class="legend-chip">
+                                            <span class="legend-color-dot low"></span>
+                                            <span>Low (1 Case)</span>
+                                        </div>
+                                        <div class="legend-chip">
+                                            <span class="legend-color-dot medium"></span>
+                                            <span>Medium (2 Cases)</span>
+                                        </div>
+                                        <div class="legend-chip">
+                                            <span class="legend-color-dot high"></span>
+                                            <span>High (3 Cases)</span>
+                                        </div>
+                                        <div class="legend-chip">
+                                            <span class="legend-color-dot very-high"></span>
+                                            <span>Very High (4+)</span>
+                                        </div>
+                                    </div>
+                                    <div class="legend-disclaimer">
+                                        DEMO DATA — Visualization levels for demonstration purposes only. Not official crime thresholds.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hotspot Inspector Card -->
+                            <div class="hotspot-inspector-card" id="hotspotInspectorCard">
+                                <div class="inspector-header">
+                                    <div>
+                                        <div class="inspector-sub-label">Selected Jurisdiction</div>
+                                        <h3 class="inspector-location-title" id="inspectorLocationTitle">Chennai</h3>
+                                    </div>
+                                    <span class="inspector-intensity-badge very-high" id="inspectorIntensityBadge">Very High Intensity</span>
+                                </div>
+
+                                <div class="inspector-metrics-grid">
+                                    <div class="inspector-metric-box">
+                                        <span class="inspector-metric-label">Total Cases</span>
+                                        <span class="inspector-metric-val" id="inspectorTotalCases">4</span>
+                                    </div>
+                                    <div class="inspector-metric-box">
+                                        <span class="inspector-metric-label">High / Critical</span>
+                                        <span class="inspector-metric-val" id="inspectorHighPriorityCases">4</span>
+                                    </div>
+                                    <div class="inspector-metric-box">
+                                        <span class="inspector-metric-label">Under Investigation</span>
+                                        <span class="inspector-metric-val" id="inspectorUnderInvestigation">2</span>
+                                    </div>
+                                    <div class="inspector-metric-box">
+                                        <span class="inspector-metric-label">Zone Status</span>
+                                        <span class="inspector-metric-val" style="font-size: 14px; color: var(--status-amber);" id="inspectorZoneStatus">Active Triage</span>
+                                    </div>
+                                </div>
+
+                                <div class="inspector-categories-section">
+                                    <span class="inspector-sub-label">Incident Categories:</span>
+                                    <div class="inspector-categories-tags" id="inspectorCategoriesTags">
+                                        <!-- Rendered by JS -->
+                                    </div>
+                                </div>
+
+                                <div class="inspector-latest-date">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    <span>Latest Report: <strong id="inspectorLatestDate">27 Sep 2026</strong></span>
+                                </div>
+
+                                <a href="case-management.html" class="btn-inspect-cases" id="btnInspectCases">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                    <span>View Cases in Case Management</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Regional Hotspot Quick-Select Strip -->
+                        <div class="hotspot-regions-strip" id="hotspotRegionsStrip">
+                            <!-- Populated dynamically by JS for Chennai, Puducherry, Cuddalore, Villupuram, Chengalpattu, Tiruvannamalai -->
+                        </div>
+                    </section>
+
+                    <!-- 5, 6, 7. Analytics Grid Row: Status Overview, Incident Distribution, Priority Overview -->
+                    <section class="analytics-grid-row" aria-label="Case Distributions">
+                        
+                        <!-- 5. Case Status Overview -->
+                        <div class="analytics-card">
+                            <div class="analytics-card-header">
+                                <h3 class="analytics-card-title">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <span>Case Status Overview</span>
+                                </h3>
+                                <span class="case-category-tag" style="font-size: 10px;">Lifecycle</span>
+                            </div>
+                            <div class="analytics-items-list" id="statusOverviewList">
+                                <!-- Populated dynamically from case.status -->
+                            </div>
+                        </div>
+
+                        <!-- 6. Incident Type Distribution -->
+                        <div class="analytics-card">
+                            <div class="analytics-card-header">
+                                <h3 class="analytics-card-title">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                    <span>Incident Types</span>
+                                </h3>
+                                <span class="case-category-tag" style="font-size: 10px;">Categories</span>
+                            </div>
+                            <div class="analytics-items-list" id="incidentOverviewList">
+                                <!-- Populated dynamically from case.incidentType -->
+                            </div>
+                        </div>
+
+                        <!-- 7. Priority Overview -->
+                        <div class="analytics-card">
+                            <div class="analytics-card-header">
+                                <h3 class="analytics-card-title">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    <span>Priority Overview</span>
+                                </h3>
+                                <span class="case-category-tag" style="font-size: 10px;">Triage</span>
+                            </div>
+                            <div class="analytics-items-list" id="priorityOverviewList">
+                                <!-- Populated dynamically from case.priority -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 8 & 9. Operational Two-Column Section: Recent Cases & Activity Feed -->
+                    <div class="operational-two-col">
+                        
+                        <!-- 8. Recent Cases Table -->
+                        <section class="recent-cases-card" aria-label="Recent Cases">
+                            <div class="analytics-card-header">
+                                <div>
+                                    <h3 class="analytics-card-title">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        <span>Recent Cases</span>
+                                    </h3>
+                                    <p class="case-page-subtitle" style="font-size: 12.5px; margin-top: 3px;">
+                                        Most recently reported cases from the shared Case Management dataset
+                                    </p>
+                                </div>
+                                <a href="case-management.html" class="btn-table-action">
+                                    <span>All Cases</span>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                                </a>
+                            </div>
+
+                            <div class="table-responsive-container">
+                                <table class="recent-cases-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Case ID</th>
+                                            <th>Incident Type</th>
+                                            <th>Date Reported</th>
+                                            <th>Location</th>
+                                            <th>Priority</th>
+                                            <th>Assigned Officer</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentCasesTableBody">
+                                        <!-- Populated dynamically by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- Right Column: Activity Feed, Quick Actions & Module Status -->
+                        <div class="side-cards-stack">
+                            
+                            <!-- 9. Recent Investigation Activity -->
+                            <section class="activity-feed-card" aria-label="Recent Investigation Activity">
+                                <div class="analytics-card-header">
+                                    <h3 class="analytics-card-title">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <span>Recent Activity</span>
+                                    </h3>
+                                    <span class="demo-status-pill" style="font-size: 10px; padding: 2px 8px;">DEMO</span>
+                                </div>
+                                <div class="activity-feed-list" id="activityFeedList">
+                                    <!-- Populated dynamically from shared cases timeline -->
+                                </div>
+                            </section>
+
+                            <!-- 10. Quick Actions -->
+                            <section class="quick-actions-card" aria-label="Quick Actions">
+                                <div class="analytics-card-header">
+                                    <h3 class="analytics-card-title">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                        <span>Quick Actions</span>
+                                    </h3>
+                                </div>
+                                <div class="quick-action-links">
+                                    <a href="case-management.html" class="quick-action-link-item">
+                                        <div class="quick-action-link-left">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                            <span>Manage Cases</span>
+                                        </div>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                                    </a>
+                                    <a href="police-tool-dashboard.html" class="quick-action-link-item">
+                                        <div class="quick-action-link-left">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                            <span>Investigation Tools</span>
+                                        </div>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                                    </a>
+                                    <a href="police-cyber-laws.html" class="quick-action-link-item">
+                                        <div class="quick-action-link-left">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                            <span>Cyber Law Reference</span>
+                                        </div>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                                    </a>
+                                </div>
+                            </section>
+
+                            <!-- 11. System / Module Status -->
+                            <section class="module-status-card" aria-label="System Module Status">
+                                <div class="analytics-card-header">
+                                    <h3 class="analytics-card-title">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                        <span>System / Module Status</span>
+                                    </h3>
+                                </div>
+                                <div class="module-status-list">
+                                    <div class="module-status-row">
+                                        <span class="module-status-name">Case Management</span>
+                                        <span class="status-badge demo">DEMO</span>
+                                    </div>
+                                    <div class="module-status-row">
+                                        <span class="module-status-name">Investigation Tools</span>
+                                        <span class="status-badge available">Available</span>
+                                    </div>
+                                    <div class="module-status-row">
+                                        <span class="module-status-name">Cyber Law Reference</span>
+                                        <span class="status-badge available">Available</span>
+                                    </div>
+                                    <div class="module-status-row">
+                                        <span class="module-status-name">Database Integration</span>
+                                        <span class="status-badge pending">Pending</span>
+                                    </div>
+                                    <div class="module-status-row">
+                                        <span class="module-status-name">Backend API</span>
+                                        <span class="status-badge pending">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="module-status-note">
+                                    Accurately represents the current frontend demonstration stage. Database and REST API endpoints will be connected in future development.
+                                </div>
+                            </section>
+
+                        </div>
+                    </div>
+
+                </div>
+            </main>
         </div>
-        <div class="nav-right">
-          <a href="police-dashboard.html" class="nav-link">Dashboard</a>
-          <a href="case-management.html" class="nav-link">Case Management</a>
-          <a href="police-tool-dashboard.html" class="nav-link">Tools</a>
-          
-          <a href="cyber-laws.html" class="nav-link">Cyber Laws</a>
-          <a href="police-profile.html" class="user-profile">
-            <i class="ph ph-user"></i>
-        </a>
-          <button class="home-icon">
-            <i class="ph ph-house-line"></i>
-          </button>
-        </div>
-      </nav>
-  
-      <div class="mobile-dropdown">
-        <a href="police-dashboard.html" class="mobile-nav-link">
-          <i class="ph ph-gauge"></i>
-          Dashboard
-        </a>
-        <a href="case-management.html" class="mobile-nav-link">
-          <i class="ph ph-folders"></i>
-          Case Management
-        </a>
-        <a href="police-tool-dashboard.html" class="mobile-nav-link">
-          <i class="ph ph-wrench"></i>
-          Tools
-        </a>
-        
-        <a href="cyber-laws.html" class="mobile-nav-link">
-          <i class="ph ph-gavel"></i>
-          Cyber Laws
-        </a>
-        <a href="police-profile.html" class="mobile-nav-link">
-            <i class="ph ph-user"></i>
-            Profile
-        </a>
-      </div>
-
-    <div class="container">
-        <main class="main-content">
-            <div class="dashboard-header">
-                <h1>Police Dashboard</h1>
-                <p>Overview of case management and department statistics</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon pending">
-                        <i class="ph ph-hourglass"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Pending Cases</h3>
-                        <div class="stat-value" id="pendingCases">0</div>
-                        <p>Awaiting investigation</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon in-progress">
-                        <i class="ph ph-spinner"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>In Progress</h3>
-                        <div class="stat-value" id="inProgressCases">0</div>
-                        <p>Currently investigating</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon closed">
-                        <i class="ph ph-check-circle"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Closed Cases</h3>
-                        <div class="stat-value" id="closedCases">0</div>
-                        <p>Successfully resolved</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon total">
-                        <i class="ph ph-folder"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Total Cases</h3>
-                        <div class="stat-value" id="totalCases">0</div>
-                        <p>All time cases</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <h3>Case Status Distribution</h3>
-                    <canvas id="caseStatusChart"></canvas>
-                </div>
-
-                <div class="dashboard-card">
-                    <h3>Case Priority Breakdown</h3>
-                    <canvas id="priorityChart"></canvas>
-                </div>
-
-                <div class="dashboard-card recent-cases">
-                    <h3>Recent Cases</h3>
-                    <div class="recent-cases-list" id="recentCasesList">
-                        <!-- Recent cases will be populated here -->
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <h3>Officer Workload</h3>
-                    <canvas id="officerWorkloadChart"></canvas>
-                </div>
-            </div>
-        </main>
     </div>
-    <script src="js/police-dashboard.js"></script>
+
+    <!-- Core Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/police-demo-data.js"></script>
     <script src="js/police-auth-check.js"></script>
+    <script src="js/police-dashboard.js"></script>
 </body>
 </html>

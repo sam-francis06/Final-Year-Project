@@ -1,138 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cyber Council</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCouncil - Statutory Laws & Cyber Law Reference</title>
     <link rel="icon" type="image/png" href="shield.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="css/user-cyber-laws.css">
-    <link rel="stylesheet" href="tool-dashboard.css">
-  </head>
-  <body>
-    <nav class="top-nav">
-        <button class="mobile-menu-button">
-            <i class="ph ph-list"></i>
-        </button>
-        <div class="nav-left">
-            <div class="logo">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <span>Cyber Council</span>
+    <link rel="stylesheet" href="css/tool-dashboard.css">
+</head>
+<body>
+    <div id="root">
+        <!-- Static shell / Fallback while React hydrates -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <a href="dashboard.html" class="header-brand" style="text-decoration: none; color: inherit;">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Client Console</span>
+                    </span>
+                </a>
             </div>
-        </div>
-        <div class="nav-right">
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="tool-dashboard.html" class="nav-link">Tools</a>
-            <a href="reports.html" class="nav-link">Reports</a>
-            <a href="user-cyber-laws.html" class="nav-link">Cyber Laws</a>
-            
-            <a href="profile.html" class="user-profile">
-                <i class="ph ph-user"></i>
-            </a>
-            <button class="home-icon">
-                <i class="ph ph-house-line"></i>
-            </button>
-        </div>
-    </nav>
 
-    <div class="mobile-dropdown">
-        <a href="dashboard.html" class="mobile-nav-link">
-            <i class="ph ph-gauge"></i>
-            Dashboard
-        </a>
-        <a href="tool-dashboard.html" class="mobile-nav-link">
-            <i class="ph ph-wrench"></i>
-            Tools
-        </a>
-        <a href="reports.html" class="mobile-nav-link">
-            <i class="ph ph-chart-pie-slice"></i>
-            Reports
-        </a>
-        <a href="user-cyber-laws.html" class="mobile-nav-link">
-            <i class="ph ph-gavel"></i>
-            Cyber Laws
-        </a>
-        <a href="profile.html" class="mobile-nav-link">
-            <i class="ph ph-user"></i>
-            Profile
-        </a>
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="dashboard.html" class="nav-item">Overview</a>
+                <a href="tool-dashboard.html" class="nav-item">Security Modules</a>
+                <a href="incident-logs.html" class="nav-item">Incident Logs</a>
+                <a href="user-cyber-laws.html" class="nav-item active">Statutory Laws</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="system-status-indicator" title="Statutory Legal Database Active">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">IT Act Reference Active</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="console-main sl-page-main" style="width: 100%; max-width: 100%; margin: 0; padding: 24px 28px; box-sizing: border-box;">
+            <div style="text-align: center; padding: 48px 24px; color: var(--text-secondary);">
+                <p>Loading Statutory Laws & Cyber Law Reference workspace...</p>
+            </div>
+        </main>
     </div>
 
-    <div class="container">
-        <div class="dashboard-content">
-            <h1>Indian Cyber Laws Analysis</h1>
-            
-            <div class="search-section">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search Indian cyber laws (e.g., 'hacking', 'data protection', 'privacy')" class="search-input">
-                    <button class="search-button" id="searchButton">
-                        <i class="ph ph-magnifying-glass"></i>
-                        Search
-                    </button>
-                </div>
-                <div id="searchResults" class="search-results"></div>
-            </div>
-
-            <div class="law-categories">
-                <div class="category-card" data-category="it-act">
-                    <i class="ph ph-book-bookmark text-primary"></i>
-                    <h3>IT Act Sections</h3>
-                    <p>Browse through different sections of the Information Technology Act, 2000.</p>
-                    <div class="category-stats">
-                        <span>43 Sections</span>
-                        <span>Last updated: 2023</span>
-                    </div>
-                </div>
-                
-                <div class="category-card" data-category="case-laws">
-                    <i class="ph ph-gavel text-primary"></i>
-                    <h3>Case Laws</h3>
-                    <p>Access landmark judgments and case studies in Indian cyber law.</p>
-                    <div class="category-stats">
-                        <span>150+ Cases</span>
-                        <span>Updated weekly</span>
-                    </div>
-                </div>
-                
-                <div class="category-card" data-category="legal-rights">
-                    <i class="ph ph-shield"></i>
-                    <h3>Legal Rights</h3>
-                    <p>Understand your rights and protections under Indian cyber laws.</p>
-                    <div class="category-stats">
-                        <span>25+ Topics</span>
-                        <span>Citizen focused</span>
-                    </div>
-                </div>
-            </div>
-
-            <section class="law-results">
-                <div class="section-header">
-                    <h2>Featured Legal Information</h2>
-                    <div class="filters">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="criminal">Criminal</button>
-                        <button class="filter-btn" data-filter="civil">Civil</button>
-                        <button class="filter-btn" data-filter="regulatory">Regulatory</button>
-                    </div>
-                </div>
-                
-                <!-- Law items will be populated by JavaScript -->
-            </section>
-
-            <section class="recent-updates">
-                <h2>Recent Updates</h2>
-                <div class="updates-list" id="updatesList">
-                    <!-- Updates will be populated by JavaScript -->
-                </div>
-            </section>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/auth-check.js"></script>
-    <script src="js/user-cyber-laws.js"></script>
-  </body>
+    <!-- Standalone Statutory Laws React Entry Point -->
+    <script type="module" src="/src/user-cyber-laws.jsx"></script>
+</body>
 </html>

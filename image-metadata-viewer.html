@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Metadata Viewer - Cyber Council</title>
+    <link rel="icon" type="image/png" href="shield.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/police-tool-dashboard.css">
+    <link rel="stylesheet" href="css/metadata.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <nav class="top-nav">
+        <button class="mobile-menu-button">
+            <i data-lucide="menu"></i>
+        </button>
+        <div class="nav-left">
+            <div class="logo">
+                <i data-lucide="shield"></i>
+                <span>Cyber Council</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <a href="police-dashboard.html" class="nav-link">Dashboard</a>
+            <a href="case-management.html" class="nav-link">Case Management</a>
+            <a href="police-tool-dashboard.html" class="nav-link active">Tools</a>
+            <a href="cyber-laws.html" class="nav-link">Cyber Laws</a>
+            <a href="police-profile.html" class="user-profile">
+                <i class="ph ph-user"></i>
+            </a>
+            <button class="home-icon">
+                <i class="ph ph-house-line"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-dropdown">
+        <a href="police-dashboard.html" class="mobile-nav-link">
+            <i class="ph ph-gauge"></i>
+            Dashboard
+        </a>
+        <a href="case-management.html" class="mobile-nav-link">
+            <i class="ph ph-folders"></i>
+            Case Management
+        </a>
+        <a href="police-tool-dashboard.html" class="mobile-nav-link">
+            <i class="ph ph-wrench"></i>
+            Tools
+        </a>
+        <a href="cyber-laws.html" class="mobile-nav-link">
+            <i class="ph ph-gavel"></i>
+            Cyber Laws
+        </a>
+        <a href="police-profile.html" class="mobile-nav-link">
+            <i class="ph ph-user"></i>
+            Profile
+        </a>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="menu-section">
+                <h3>MAIN MENU</h3>
+                <a href="police-tool-dashboard.html" class="menu-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    Tool-Dashboard
+                </a>
+            </div>
+
+            <div class="menu-section">
+                <h3>Digital Forensics Tools</h3>
+                <a href="file-hash-generator.html" class="menu-item">
+                    <i data-lucide="search"></i>
+                    File Hash Generator
+                </a>
+                <a href="file-metadata-analyzer.html" class="menu-item">
+                    <i data-lucide="file-search"></i>
+                    File Metadata Analyzer
+                </a>
+                <a href="image-metadata-viewer.html" class="menu-item active">
+                    <i data-lucide="image"></i>
+                    Image Metadata Viewer
+                </a>
+                <a href="file-type-validator.html" class="menu-item">
+                    <i data-lucide="file-check-2"></i>
+                    File Type Validator
+                </a>
+            </div>
+
+            <div class="menu-section">
+                <h3>Cyber Investigation Tools</h3>
+                <a href="username-lookup.html" class="menu-item">
+                    <i data-lucide="user-search"></i>
+                    Username Lookup
+                </a>
+                <a href="url-status-checker.html" class="menu-item">
+                    <i data-lucide="globe"></i>
+                    URL Live Status Checker
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>Image Metadata Viewer</h1>
+                <p>Extract and analyze EXIF data from images to reveal crucial details about origin, location, and authenticity.</p>
+            </div>
+
+            <!-- Demo Purpose Banner -->
+            <div class="police-purpose-banner">
+                <div class="banner-icon">
+                    <i data-lucide="info"></i>
+                </div>
+                <div class="banner-content">
+                    <h4>Preliminary Forensic Examination <span class="demo-tag">DEMO / FRONTEND ONLY</span></h4>
+                    <p>This module provides preliminary client-side inspection of Exchangeable Image File Format (EXIF) metadata for investigative triage. No remote uploads or storage are performed.</p>
+                    <div class="banner-disclaimer">
+                        <strong>Notice:</strong> Preliminary investigative tool only. Does not provide legally certified forensic conclusions or court-admissible chain-of-custody certificates.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div style="background-color: var(--bg-primary); border-radius: 0.75rem; border: 1px solid var(--border-color); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #93c5fd; border-radius: 0.75rem; padding: 2.5rem; background-color: rgba(59, 130, 246, 0.02); text-align: center;" id="uploadDropZone">
+                    <div style="width: 4rem; height: 4rem; border-radius: 1rem; background-color: rgba(59, 130, 246, 0.1); color: var(--primary-color); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                        <i data-lucide="image" style="width: 2rem; height: 2rem;"></i>
+                    </div>
+                    <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Select or Drop Image File</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Supported formats: JPEG, PNG, TIFF, WebP, HEIC (Max 50MB)</p>
+                    
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <button type="button" class="primary-button" id="browseBtn" onclick="document.getElementById('imageInput').click();">
+                            <i data-lucide="upload"></i>
+                            Choose Image
+                        </button>
+                        <button type="button" class="primary-button" id="viewMetadataBtn" style="background-color: #10b981;">
+                            <i data-lucide="eye"></i>
+                            View Metadata
+                        </button>
+                    </div>
+                    <span id="selectedFileName" style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--primary-color); font-weight: 500;">No file selected</span>
+                </div>
+            </div>
+
+            <!-- Results Area -->
+            <div id="resultsArea" style="background-color: var(--bg-primary); border-radius: 0.75rem; border: 1px solid var(--border-color); padding: 2rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="file-check" style="color: var(--primary-color);"></i>
+                        EXIF Metadata Analysis Results
+                    </h3>
+                    <span class="demo-tag">SIMULATED FORENSIC OUTPUT</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+                    
+                    <div style="background-color: var(--bg-secondary); border-radius: 0.5rem; padding: 1.25rem; border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem;">File Details</h4>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>File Name:</strong> <span id="resFileName">sample_evidence_001.jpg</span></p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Resolution:</strong> <span id="resDimensions">4032 &times; 3024 px</span></p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>MIME Type:</strong> image/jpeg</p>
+                        <p style="font-size: 0.875rem;"><strong>File Size:</strong> <span id="resFileSize">3.4 MB</span></p>
+                    </div>
+
+                    <div style="background-color: var(--bg-secondary); border-radius: 0.5rem; padding: 1.25rem; border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem;">Camera &amp; Hardware</h4>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Camera Make:</strong> Apple / Canon</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Model:</strong> iPhone 15 Pro / EOS R5</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Software:</strong> iOS 17.5.1</p>
+                        <p style="font-size: 0.875rem;"><strong>Color Space:</strong> sRGB (Standard)</p>
+                    </div>
+
+                    <div style="background-color: var(--bg-secondary); border-radius: 0.5rem; padding: 1.25rem; border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem;">Capture Settings</h4>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>ISO Speed:</strong> ISO 64</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Exposure Time:</strong> 1/120 sec</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>F-Number:</strong> f/1.78</p>
+                        <p style="font-size: 0.875rem;"><strong>Focal Length:</strong> 24mm equivalent</p>
+                    </div>
+
+                    <div style="background-color: var(--bg-secondary); border-radius: 0.5rem; padding: 1.25rem; border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem;">GPS Geolocation (Simulated)</h4>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Latitude:</strong> 11.9416&deg; N</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Longitude:</strong> 79.8083&deg; E</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0.35rem;"><strong>Location:</strong> Puducherry, India</p>
+                        <p style="font-size: 0.875rem;"><strong>Altitude:</strong> 12m AMSL</p>
+                    </div>
+
+                </div>
+
+                <div style="margin-top: 1.5rem; padding: 1rem; border-radius: 0.5rem; background-color: rgba(59, 130, 246, 0.05); border: 1px solid #bfdbfe; font-size: 0.8125rem; color: var(--text-secondary);">
+                    <strong>Forensic Integrity Note:</strong> EXIF tags are subject to spoofing, post-capture editing, or social media compression stripping. Always cross-verify file hashes against original storage media.
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/police-auth-check.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+
+            const fileInput = document.getElementById('imageInput');
+            const selectedFileName = document.getElementById('selectedFileName');
+            const resFileName = document.getElementById('resFileName');
+            const resFileSize = document.getElementById('resFileSize');
+            const resDimensions = document.getElementById('resDimensions');
+            const viewMetadataBtn = document.getElementById('viewMetadataBtn');
+            const resultsArea = document.getElementById('resultsArea');
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    selectedFileName.textContent = `Selected: ${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+                    resFileName.textContent = file.name;
+                    resFileSize.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB`;
+
+                    // Read image dimensions locally
+                    const img = new Image();
+                    img.onload = function() {
+                        resDimensions.textContent = `${this.width} × ${this.height} px`;
+                    };
+                    img.src = URL.createObjectURL(file);
+                }
+            });
+
+            viewMetadataBtn.addEventListener('click', () => {
+                resultsArea.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

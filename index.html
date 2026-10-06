@@ -1,427 +1,698 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="shield.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Cyber Council</title>
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
-  <body>
-    <nav class="nav">
-      <div class="nav-content">
-        <a href="/" class="nav-logo">
-          <svg
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            fill="none"
-          >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-          <span>Cyber Council</span>
-        </a>
-        <div class="nav-links">
-          <a href="index.html" class="active">Home</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="team.html">Team</a>
-        </div>
-        <button class="hamburger" aria-label="Toggle menu">
-          <svg
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            fill="none"
-          >
-            <path d="M3 12h18M3 6h18M3 18h18" />
-          </svg>
-        </button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="shield.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Cyber Council | Digital Safety &amp; Cybercrime Response Platform</title>
+  <meta name="description" content="CyberCouncil connects citizens with cybersecurity awareness, incident reporting, and police cybercrime investigation workflows." />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <!-- Main Public Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <span>Cyber Council</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="team.html">Team</a>
       </div>
-    </nav>
+      <button class="hamburger" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M3 12h18M3 6h18M3 18h18" />
+        </svg>
+      </button>
+    </div>
+  </nav>
 
-    <main>
-      <section class="hero">
-        <div class="container">
-          <h1>
-            Your Guide to<br /><span class="gradient-text">Cyber Laws</span>
-          </h1>
-          <p class="hero-subtitle">
-            Get reliable information and guidance on cybersecurity legal matters. Resources and support available 24/7.
-          </p>
-
-          <div class="button-cards">
-            <a href="login.html" class="card card-button">
-              <div class="card-content">
-                <div class="icon-container">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="32"
-                    height="32"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  >
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
-                <h3>For Individuals</h3>
-                <p>Get guidance on cyber laws and report incidents</p>
-                <span class="card-action">Click to Continue &rarr;</span>
-              </div>
-            </a>
-            <a href="police-dashboard.html" class="card card-button">
-              <div class="card-content">
-                <div class="icon-container">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="32"
-                    height="32"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  >
-                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16" />
-                    <path d="M3 7h18" />
-                    <path d="M8 12h8" />
-                    <path d="M8 16h8" />
-                  </svg>
-                </div>
-                <h3>For Police Departments</h3>
-                <p>Access comprehensive cyber law resources</p>
-                <span class="card-action">Click to Continue &rarr;</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="features" id="features">
-        <div class="container">
-          <h2>Key Features</h2>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="48"
-                  height="48"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-              </div>
-              <h3>Cybersecurity Tools</h3>
-              <p>
-                Protect yourself with tools like phishing detection, WiFi
-                vulnerability scanner, password strength checker, and social
-                engineering alerts.
-              </p>
-            </div>
-
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="48"
-                  height="48"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                >
-                  <path
-                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                  />
-                  <path d="M14 2v6h6" />
-                  <path d="M16 13H8" />
-                  <path d="M16 17H8" />
-                  <path d="M10 9H8" />
-                </svg>
-              </div>
-              <h3>Forensics & Investigation</h3>
-              <p>
-                Digital forensics tools for law enforcement, including metadata
-                analysis, file hash generation, and image inspection.
-              </p>
-            </div>
-
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="48"
-                  height="48"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                >
-                  <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
-                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
-                  <line x1="6" y1="1" x2="6" y2="4" />
-                  <line x1="10" y1="1" x2="10" y2="4" />
-                  <line x1="14" y1="1" x2="14" y2="4" />
-                </svg>
-              </div>
-              <h3>Indian Cyber Laws</h3>
-              <p>
-                Explore a structured database of Indian IT Act sections with
-                penalties, case studies, and real-world scenarios.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-
-      <section class="features" id="about">
-        <div class="container">
-          <h2>About</h2>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="2" fill="none">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <h3>Our Mission</h3>
-              <p>To empower individuals and law enforcement agencies with cutting-edge cybersecurity tools and comprehensive legal resources, making the digital world safer for everyone.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="2" fill="none">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <h3>Our Expertise</h3>
-              <p>With over a decade of experience in cybersecurity and legal consultation, our team of experts provides reliable solutions for digital security challenges.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="icon-container">
-                <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="2" fill="none">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <h3>Our Community</h3>
-              <p>Join our growing community of cybersecurity professionals, law enforcement officers, and individuals committed to creating a secure digital environment.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact" id="contact">
-        <div class="container">
-          <h2 class="section-title">Contact Us</h2>
-          <div class="contact-content">
-            <div class="contact-info">
-              <h3>Get in Touch</h3>
-              <p class="contact-description">
-                Have questions? We're here to help you with any inquiries.
-              </p>
-              <div class="contact-details">
-                <div class="contact-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  >
-                    <path
-                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                    />
-                  </svg>
-                  <span>+91 8300496804</span>
-                </div>
-                <div class="contact-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                  >
-                    <path
-                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                    />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
-                  <span>cybercouncildev@gmail.com</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="contact-form">
-              <h3>Send Us a Message</h3>
-              <form id="contact-form">
-                <div class="form-group">
-                  <label for="name">Your Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    placeholder="Enter your name"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="contact-email">Your Email</label>
-                  <input
-                    type="email"
-                    id="contact-email"
-                    required
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    required
-                    placeholder="How can we help you?"
-                  ></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Press</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">API</a></li>
-              <li><a href="#">Status</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-              <li><a href="#">GDPR</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Contact</h4>
-            <ul>
-              <li><a href="#contact">Support</a></li>
-              <li><a href="#">Sales</a></li>
-              <li><a href="#">Partners</a></li>
-              <li><a href="#">Media</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 Cyber Council. All rights reserved.</p>
+        <h1>
+          Your Digital Safety &amp; Cybercrime<br /><span class="gradient-text">Response Platform</span>
+        </h1>
+        <p class="hero-subtitle">
+          CyberCouncil connects citizens with cybersecurity awareness, incident reporting, and police cybercrime investigation workflows.
+        </p>
+
+        <!-- Role Entry Cards -->
+        <div class="button-cards">
+          <!-- Card 1: Citizen / Individual Portal -->
+          <a href="citizen-login.html" class="card card-button portal-card portal-card-individual">
+            <div class="card-content">
+              <div class="icon-container">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <h3>For Individuals</h3>
+              <p>Access cybersecurity tools, report cyber incidents, review incident history, and learn about applicable cyber laws.</p>
+              <span class="card-action">Enter Citizen Portal &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Card 2: Police Department Portal -->
+          <a href="police-login.html" class="card card-button portal-card portal-card-police">
+            <div class="card-content">
+              <div class="icon-container">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <polygon points="12 8 13.5 11 17 11.5 14.5 14 15 17.5 12 16 9 17.5 9.5 14 7 11.5 10.5 11" fill="none" stroke="currentColor" stroke-width="1.75" />
+                </svg>
+              </div>
+              <h3>For Police Departments</h3>
+              <p>Access cybercrime case management, investigation tools, hotspot analysis, and cyber-law reference resources.</p>
+              <span class="card-action">Police Department Login &rarr;</span>
+            </div>
+          </a>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <button class="theme-toggle" aria-label="Toggle theme">
-      <svg
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-        fill="none"
-      >
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </button>
+    <!-- Key Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Key Features</h2>
+          <p class="section-subtitle">
+            A unified architecture bridging citizen self-defense with specialized law enforcement capabilities.
+          </p>
+        </div>
 
-    <script>
-      // Theme toggle functionality
-      const themeToggle = document.querySelector('.theme-toggle');
-      const html = document.documentElement;
+        <div class="features-grid">
+          <!-- 1. Cybersecurity Tools -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+            </div>
+            <h3>Cybersecurity Tools</h3>
+            <p>
+              Essential defensive utilities empowering individuals to assess digital risks and protect personal assets.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Phishing detection &amp; suspicious link scanner</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Password auditing &amp; entropy analyzer</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Privacy risk &amp; permission analyzer</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>File metadata inspection &amp; threat detection</span>
+              </li>
+            </ul>
+          </div>
 
-      // Check for saved theme preference
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      html.setAttribute('data-theme', savedTheme);
+          <!-- 2. Incident Reporting -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="12" y1="18" x2="12" y2="12" />
+                <line x1="9" y1="15" x2="15" y2="15" />
+              </svg>
+            </div>
+            <h3>Incident Reporting</h3>
+            <p>
+              Structured reporting workflow for citizens to document and log cyber offenses with evidence.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Report financial fraud, identity theft &amp; harassment</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Track submitted reports with generated tracking IDs</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Maintain an organized personal incident history log</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Attach digital evidence files and transaction proofs</span>
+              </li>
+            </ul>
+          </div>
 
-      // Update theme toggle icon
-      const updateThemeIcon = (theme) => {
-        const moonIcon =
-          '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
-        const sunIcon =
-          '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
-        themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-      };
+          <!-- 3. Cybercrime Investigation -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+            <h3>Cybercrime Investigation</h3>
+            <p>
+              Operational workspace for law enforcement officers to conduct technical investigations.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Full-cycle case management &amp; status progression</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Digital forensic utilities &amp; artifact extraction</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Cross-platform username &amp; OSINT investigation</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>URL intelligence, live status &amp; WHOIS lookup</span>
+              </li>
+            </ul>
+          </div>
 
-      updateThemeIcon(savedTheme);
+          <!-- 4. Digital Forensics & Verification -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6" />
+                <path d="M16 13H8" />
+                <path d="M16 17H8" />
+                <path d="M10 9H8" />
+              </svg>
+            </div>
+            <h3>Forensics &amp; Evidence</h3>
+            <p>
+              Technical verification utilities ensuring cryptographic integrity and evidence preservation.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Cryptographic hash generation (MD5, SHA-1, SHA-256)</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>EXIF camera metadata &amp; GPS geodata extraction</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>File MIME signature validation against spoofed extensions</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Client IP detection &amp; network diagnostic tools</span>
+              </li>
+            </ul>
+          </div>
 
-      // Toggle theme
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          <!-- 5. Crime Hotspot Mapping -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3>Crime Hotspot Mapping</h3>
+            <p>
+              Spatial intelligence visualization designed to uncover geographic patterns in cybercrime.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Visualize aggregated cybercrime case locations</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Identify geographic patterns &amp; clusters from reports</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interactive map markers with severity categorization</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Jurisdictional trend analysis for resource planning</span>
+              </li>
+            </ul>
+          </div>
 
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+          <!-- 6. Cyber Law Reference -->
+          <div class="feature-card">
+            <div class="icon-container">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3>Cyber Law Reference</h3>
+            <p>
+              Comprehensive legal guide covering the Indian IT Act and procedural standards for cyber offenses.
+            </p>
+            <ul class="feature-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Citizen-facing statutory guidance and rights</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Police investigation legal reference &amp; section codes</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Penalty schedules, bailable status &amp; precedents</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Real-world case studies &amp; legal scenario mapping</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About CyberCouncil</h2>
+          <p class="section-subtitle">
+            CyberCouncil is a unified cybersecurity and cybercrime response platform designed to connect citizen reporting with police investigation workflows.
+          </p>
+        </div>
+
+        <div class="about-dual-grid">
+          <!-- Citizen Portal Side -->
+          <div class="about-portal-card">
+            <div class="about-portal-badge citizen">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>Citizen Portal</span>
+            </div>
+            <h3>Public Awareness &amp; Defense</h3>
+            <p>
+              Empowers everyday internet users with proactive threat detection tools, legal literacy, and transparent incident reporting channels.
+            </p>
+            <ul class="about-item-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Awareness:</strong> Understand evolving cyber threat vectors, social engineering, and fraud mechanisms.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Security Inspection Tools:</strong> Run self-service scans for phishing links, password strength, and app permissions.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Incident Reporting:</strong> Guided reporting interface to submit complaints with relevant transaction or file evidence.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Incident Tracking:</strong> Check status updates and review historical incident records in a private console.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Cyber-Law Awareness:</strong> Plain-language breakdowns of rights and penalties under the Indian Information Technology Act.</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Police Console Side -->
+          <div class="about-portal-card">
+            <div class="about-portal-badge police">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polygon points="12 8 13.5 11 17 11.5 14.5 14 15 17.5 12 16 9 17.5 9.5 14 7 11.5 10.5 11" fill="none" stroke="currentColor" stroke-width="1.75" />
+              </svg>
+              <span>Police Console</span>
+            </div>
+            <h3>Law Enforcement &amp; Investigation</h3>
+            <p>
+              Equips law enforcement agencies, cyber cells, and investigators with technical forensic tools, hotspot intelligence, and case tracking.
+            </p>
+            <ul class="about-item-list">
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Case Management:</strong> Structured case tracking with urgency metrics, status timelines, and officer assignment.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Digital Investigation Tools:</strong> OSINT username tracking, URL status pinging, WHOIS registration, and screenshot audits.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Evidence Analysis:</strong> File checksum generation (SHA-256), EXIF location extraction, and MIME type verification.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Crime Hotspot Mapping:</strong> Spatial analysis of incident coordinates to detect geographic crime clusters.</div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Cyber-Law Reference:</strong> Legal handbook mapping specific digital crimes to corresponding IT Act sections and court precedents.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works / Workflow Section -->
+    <section class="workflow-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">How CyberCouncil Works</h2>
+          <p class="section-subtitle">
+            Bridging the gap between citizen incident reporting and specialized law enforcement response.
+          </p>
+        </div>
+
+        <div class="workflow-track">
+          <!-- Step 1 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">1</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+            </div>
+            <h4>Citizen</h4>
+            <p>Citizen encounters a digital threat or undergoes a cyber incident.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">2</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="12" y1="18" x2="12" y2="12" />
+                  <line x1="9" y1="15" x2="15" y2="15" />
+                </svg>
+              </div>
+            </div>
+            <h4>Report Incident</h4>
+            <p>Incident details and evidence artifacts are submitted through the portal.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">3</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                </svg>
+              </div>
+            </div>
+            <h4>Case Database</h4>
+            <p>Standardized intake and staging for jurisdictional review and triage.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">4</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </div>
+            </div>
+            <h4>Police Case Management</h4>
+            <p>Officers assess priority, verify reports, and assign cases to investigation teams.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">5</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </div>
+            </div>
+            <h4>Investigation</h4>
+            <p>Specialized forensic verification, URL intelligence, and OSINT tracing.</p>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="workflow-card">
+            <div class="workflow-card-head">
+              <span class="workflow-step-num">6</span>
+              <div class="workflow-card-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+            </div>
+            <h4>Resolution &amp; Updates</h4>
+            <p>Case status milestones recorded and preventative insights visualized on hotspot maps.</p>
+          </div>
+        </div>
+
+        <div class="workflow-notice">
+          <div class="workflow-notice-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </div>
+          <div class="workflow-notice-text">
+            <strong>Implementation Notice:</strong> End-to-end cloud database integration linking citizen incident reporting with police case management represents the platform's multi-phase deployment roadmap. Currently, modules operate on localized frontend states and mock datasets for evaluation and demonstration.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p class="contact-description">
+              Have questions or feedback regarding the CyberCouncil platform? Connect with our development and research team.
+            </p>
+            <div class="contact-details">
+              <div class="contact-item">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span>+91 8300496804</span>
+              </div>
+              <div class="contact-item">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <span>cybercouncildev@gmail.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send Us a Message</h3>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required placeholder="Enter your name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Your Email</label>
+                <input type="email" id="contact-email" required placeholder="Enter your email" />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="4" required placeholder="How can we help you?"></textarea>
+              </div>
+              <button type="submit">Send Message</button>
+            </form>
+            <div id="contact-status" style="margin-top: 1rem; display: none; font-size: 0.95rem; font-weight: 500;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Clean Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Cyber Council</h4>
+          <p style="color: var(--text-color); opacity: 0.8; font-size: 0.95rem; line-height: 1.5; margin-bottom: 0.75rem; font-weight: 500;">
+            Digital Safety. Cybercrime Response. Public Awareness.
+          </p>
+          <p style="color: var(--text-color); opacity: 0.65; font-size: 0.85rem; line-height: 1.45;">
+            A unified cybersecurity ecosystem connecting citizen awareness with law enforcement investigation.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Portals</h4>
+          <ul>
+            <li><a href="citizen-login.html">Citizen Portal</a></li>
+            <li><a href="tool-dashboard.html">Security Modules</a></li>
+            <li><a href="police-login.html">Police Department Login</a></li>
+            <li><a href="case-management.html">Case Management</a></li>
+            <li><a href="user-cyber-laws.html">Statutory Laws</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact &amp; Support</h4>
+          <ul>
+            <li><a href="tel:+918300496804">+91 8300496804</a></li>
+            <li><a href="mailto:cybercouncildev@gmail.com">cybercouncildev@gmail.com</a></li>
+            <li><a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer">National Cyber Crime Portal &nearr;</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Cyber Council. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Floating Button -->
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+
+    // Update theme toggle icon
+    const updateThemeIcon = (theme) => {
+      const moonIcon =
+        '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      const sunIcon =
+        '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+      themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+    };
+
+    updateThemeIcon(savedTheme);
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // Hamburger menu toggle for mobile nav
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const nav = document.querySelector('.nav');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', (event) => {
+        navLinks.classList.toggle('active');
+        event.stopPropagation();
       });
 
-      // Hamburger menu toggle for mobile nav
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
-      const nav = document.querySelector('.nav');
+      document.addEventListener('click', (event) => {
+        if (
+          !nav.contains(event.target) &&
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')
+        ) {
+          navLinks.classList.remove('active');
+        }
+      });
 
-      if (hamburger && navLinks) {
-        hamburger.addEventListener('click', (event) => {
-          navLinks.classList.toggle('active');
-          event.stopPropagation();
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
         });
+      });
+    }
 
-        document.addEventListener('click', (event) => {
-          if (
-            !nav.contains(event.target) &&
-            !hamburger.contains(event.target) &&
-            navLinks.classList.contains('active')
-          ) {
-            navLinks.classList.remove('active');
-          }
-        });
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
+    if (contactForm && contactStatus) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+        contactStatus.style.display = 'block';
+        contactStatus.style.color = 'var(--purple-400)';
+        contactStatus.textContent = 'Transmitting inquiry...';
 
-        navLinks.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-          });
-        });
-      }
-    </script>
+        setTimeout(() => {
+          contactStatus.style.color = '#10b981';
+          contactStatus.textContent = 'Thank you! Your message has been received. Our team will respond shortly.';
+          contactForm.reset();
+          if (submitBtn) submitBtn.disabled = false;
+          setTimeout(() => {
+            contactStatus.style.display = 'none';
+          }, 6000);
+        }, 800);
+      });
+    }
+  </script>
+</body>
 
-    <script src="js/index.js"></script>
-  </body>
 </html>
-

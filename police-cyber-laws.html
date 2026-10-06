@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCouncil | Police Cyber Law Reference</title>
+    <meta name="description" content="CyberCouncil Police Console: Authoritative Indian cyber law and digital evidence statutory reference for police investigation.">
+    <link rel="icon" type="image/png" href="shield.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tool-dashboard.css?v=4">
+    <link rel="stylesheet" href="css/police-tool-dashboard.css?v=4">
+    <link rel="stylesheet" href="css/police-cyber-laws.css?v=3">
+</head>
+<body>
+    <div id="root">
+        <!-- Top Console Header -->
+        <header class="console-header">
+            <div class="header-left-cluster">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+
+                <div class="header-brand">
+                    <div class="brand-shield" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="brand-title">
+                        CyberCouncil
+                        <span class="brand-badge">Police Console</span>
+                    </span>
+                </div>
+            </div>
+
+            <nav class="header-nav" aria-label="Console Navigation">
+                <a href="police-dashboard.html" class="nav-item">Dashboard</a>
+                <a href="case-management.html" class="nav-item">Case Management</a>
+                <a href="police-tool-dashboard.html" class="nav-item">Tools</a>
+                <a href="police-cyber-laws.html" class="nav-item active">Cyber Laws</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="system-status-indicator" title="Police Department Legal Reference Node Active">
+                    <span class="indicator-dot"></span>
+                    <span class="status-indicator-text">Legal Node Online</span>
+                </div>
+
+                <button type="button" class="theme-btn" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
+                    <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+
+                <a href="police-profile.html" class="user-badge" id="userBadge" title="Officer Profile">
+                    <div class="user-avatar-circle" id="userInitials">PD</div>
+                    <span id="userName" class="user-name-text">Officer</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="console-body">
+            <!-- Sidebar Drawer Backdrop -->
+            <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+            <!-- Mobile & Desktop Navigation Sidebar -->
+            <aside class="console-sidebar" id="consoleSidebar" aria-label="Police Module Sidebar">
+                <div class="sidebar-drawer-header">
+                    <div class="drawer-brand">
+                        <div class="brand-shield" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span class="brand-title">CyberCouncil <span class="brand-badge" style="font-size: 11px;">Police</span></span>
+                    </div>
+                    <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation drawer">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+
+                <div class="mobile-nav-section">
+                    <div class="sidebar-label">Navigation</div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="police-dashboard.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    <span>Dashboard</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="case-management.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                    <span>Case Management</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-tool-dashboard.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    <span>Tools</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-cyber-laws.html" class="sidebar-link active">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                                    <span>Cyber Laws</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="police-profile.html" class="sidebar-link">
+                                <span class="sidebar-link-content">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <span>Profile</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Desktop Sidebar Statutory Modules -->
+                <div class="sidebar-operations-section" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <div class="sidebar-label">PRIMARY STATUTES</div>
+                        <ul class="sidebar-menu">
+                            <li>
+                                <button type="button" class="sidebar-link active" data-sidebar-act="">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                                        <span>All Legislations</span>
+                                    </span>
+                                    <span class="sidebar-badge" id="sbCountAll">33</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-act="Information Technology Act, 2000">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                        <span>IT Act, 2000</span>
+                                    </span>
+                                    <span class="sidebar-badge" id="sbCountIT">18</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-act="Bharatiya Nyaya Sanhita, 2023">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                        <span>BNS, 2023</span>
+                                    </span>
+                                    <span class="sidebar-badge" id="sbCountBNS">7</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-act="Bharatiya Sakshya Adhiniyam, 2023">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                        <span>BSA, 2023</span>
+                                    </span>
+                                    <span class="sidebar-badge" id="sbCountBSA">4</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-act="Bharatiya Nagarik Suraksha Sanhita, 2023">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span>BNSS, 2023</span>
+                                    </span>
+                                    <span class="sidebar-badge" id="sbCountBNSS">4</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="sidebar-label">EVIDENTIARY SPECIALS</div>
+                        <ul class="sidebar-menu">
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-category="Electronic Evidence">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                        <span>Digital Records (Sec 63)</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="sidebar-link" data-sidebar-category="Investigation / Procedure">
+                                    <span class="sidebar-link-content">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                                        <span>Search/AV (Sec 105)</span>
+                                    </span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Officer Notice Card -->
+                    <div style="background: var(--bg-canvas, #f6f8fa); border: 1px solid var(--border-subtle, #d0d7de); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--text-secondary, #57606a); line-height: 1.5;">
+                        <strong style="color: var(--text-primary, #1f2328); display: block; margin-bottom: 4px;">Legal Reference Notice</strong>
+                        This system is an investigative reference interface, not legal advice. Always corroborate statutory applicability with the Public Prosecutor and current official notifications.
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Legal Reference Canvas -->
+            <main class="console-main" style="flex: 1; overflow-y: auto;">
+                <div class="law-ref-layout">
+                    
+                    <!-- Page Header Cluster -->
+                    <section class="law-ref-header">
+                        <div class="law-header-top">
+                            <div class="law-header-titles">
+                                <span class="law-category-tag">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    Law Enforcement Investigative Codex
+                                </span>
+                                <h1 class="law-page-title">Cyber Law Reference</h1>
+                                <p class="law-page-subtitle">Indian cyber law and digital evidence reference for police investigation</p>
+                            </div>
+
+                            <div class="header-badges-cluster">
+                                <div class="official-sources-pill" title="Sourced exclusively from verified India Code and MeitY official gazettes">
+                                    <span class="official-source-dot"></span>
+                                    <span>OFFICIAL REFERENCE SOURCES</span>
+                                </div>
+                                <div class="statutory-sync-badge" title="Verification timestamp">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <span>Reviewed: Sept 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statutory Disclaimer Notice -->
+                        <div class="law-notice-banner" role="alert">
+                            <div class="notice-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <div class="notice-content">
+                                <div class="notice-title">Reference Tool Only</div>
+                                <div class="notice-text">
+                                    Reference tool only. Verify the current statutory text, amendments, notifications, and applicable procedure before taking legal action. Reference only &mdash; verify the current statutory text and applicable procedure before relying on it. This interface is not a substitute for departmental legal guidance.
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Overview Metrics Cards -->
+                    <section class="law-stats-grid" aria-label="Reference Statistics">
+                        <div class="law-stat-card">
+                            <div class="stat-icon-wrap acts" style="background: rgba(9, 105, 218, 0.1); color: var(--brand-blue, #0969da);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="statActsCount">4</div>
+                                <div class="stat-label">Acts Referenced</div>
+                            </div>
+                        </div>
+
+                        <div class="law-stat-card">
+                            <div class="stat-icon-wrap sections" style="background: rgba(46, 160, 67, 0.1); color: var(--color-success, #1a7f37);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="statSectionsCount">33</div>
+                                <div class="stat-label">Sections Indexed</div>
+                            </div>
+                        </div>
+
+                        <div class="law-stat-card">
+                            <div class="stat-icon-wrap evidence" style="background: rgba(130, 80, 223, 0.1); color: var(--color-evidence, #8250df);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="statEvidenceCount">4</div>
+                                <div class="stat-label">Evidence Provisions</div>
+                            </div>
+                        </div>
+
+                        <div class="law-stat-card">
+                            <div class="stat-icon-wrap procedure" style="background: rgba(191, 135, 0, 0.1); color: var(--color-warning, #9a6700);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="statProcedureCount">7</div>
+                                <div class="stat-label">Investigation Provisions</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Featured Acts Section -->
+                    <section class="featured-acts-section" aria-labelledby="featuredActsHeading">
+                        <div class="section-title-wrap">
+                            <h2 class="section-heading" id="featuredActsHeading">Featured Legislations</h2>
+                            <span class="section-subtext">Click an Act card to filter indexed provisions</span>
+                        </div>
+
+                        <div class="featured-acts-grid">
+                            <!-- Card 1: IT Act 2000 -->
+                            <article class="act-card" data-filter-act="Information Technology Act, 2000" tabindex="0" role="button" aria-label="Filter by Information Technology Act 2000">
+                                <div class="act-card-top">
+                                    <span class="act-pill-badge it-act">IT Act 2000</span>
+                                    <span class="act-code-badge">Act No. 21 of 2000</span>
+                                </div>
+                                <h3 class="act-card-name">Information Technology Act, 2000</h3>
+                                <p class="act-card-desc">
+                                    Primary Indian legislation dealing with electronic records, electronic signatures, cyber offences and related matters.
+                                </p>
+                                <div class="act-card-footer">
+                                    <span>18 indexed provisions</span>
+                                    <span>Filter Act &rarr;</span>
+                                </div>
+                            </article>
+
+                            <!-- Card 2: BNS 2023 -->
+                            <article class="act-card" data-filter-act="Bharatiya Nyaya Sanhita, 2023" tabindex="0" role="button" aria-label="Filter by Bharatiya Nyaya Sanhita 2023">
+                                <div class="act-card-top">
+                                    <span class="act-pill-badge bns">BNS 2023</span>
+                                    <span class="act-code-badge">Act No. 45 of 2023</span>
+                                </div>
+                                <h3 class="act-card-name">Bharatiya Nyaya Sanhita, 2023</h3>
+                                <p class="act-card-desc">
+                                    General criminal-law provisions that may be relevant to offences involving electronic records, fraud, forgery and other conduct in cybercrime investigations.
+                                </p>
+                                <div class="act-card-footer">
+                                    <span>7 indexed provisions</span>
+                                    <span>Filter Act &rarr;</span>
+                                </div>
+                            </article>
+
+                            <!-- Card 3: BNSS 2023 -->
+                            <article class="act-card" data-filter-act="Bharatiya Nagarik Suraksha Sanhita, 2023" tabindex="0" role="button" aria-label="Filter by Bharatiya Nagarik Suraksha Sanhita 2023">
+                                <div class="act-card-top">
+                                    <span class="act-pill-badge bnss">BNSS 2023</span>
+                                    <span class="act-code-badge">Act No. 46 of 2023</span>
+                                </div>
+                                <h3 class="act-card-name">Bharatiya Nagarik Suraksha Sanhita, 2023</h3>
+                                <p class="act-card-desc">
+                                    Criminal procedure reference relevant to investigation and procedural handling.
+                                </p>
+                                <div class="act-card-footer">
+                                    <span>4 indexed provisions</span>
+                                    <span>Filter Act &rarr;</span>
+                                </div>
+                            </article>
+
+                            <!-- Card 4: BSA 2023 -->
+                            <article class="act-card" data-filter-act="Bharatiya Sakshya Adhiniyam, 2023" tabindex="0" role="button" aria-label="Filter by Bharatiya Sakshya Adhiniyam 2023">
+                                <div class="act-card-top">
+                                    <span class="act-pill-badge bsa">BSA 2023</span>
+                                    <span class="act-code-badge">Act No. 47 of 2023</span>
+                                </div>
+                                <h3 class="act-card-name">Bharatiya Sakshya Adhiniyam, 2023</h3>
+                                <p class="act-card-desc">
+                                    Evidence framework including provisions concerning electronic and digital records.
+                                </p>
+                                <div class="act-card-footer">
+                                    <span>4 indexed provisions</span>
+                                    <span>Filter Act &rarr;</span>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <!-- Dedicated Electronic Evidence Panel (BSA 2023) -->
+                    <section class="electronic-evidence-card" aria-labelledby="evidencePanelHeading">
+                        <div class="evidence-panel-left">
+                            <div class="evidence-shield-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="evidence-panel-text">
+                                <div class="evidence-panel-title">
+                                    <span id="evidencePanelHeading">Electronic &amp; Digital Records Evidentiary Framework</span>
+                                    <span class="cell-category-pill" style="font-size: 11px;">BSA 2023 &bull; Section 63</span>
+                                </div>
+                                <p class="evidence-panel-desc">
+                                    Electronic and digital records have specific evidentiary considerations under the <strong>Bharatiya Sakshya Adhiniyam, 2023</strong> (replacing Section 65B of the Indian Evidence Act, 1872). Digital files, server logs, mobile extractions, and electronic messages are <em>not automatically admissible</em> without satisfying statutory conditions regarding source integrity, lawful custody, device control, and proper certificate verification under Section 63.
+                                </p>
+                            </div>
+                        </div>
+
+                        <a href="https://www.indiacode.nic.in/handle/123456789/20063" target="_blank" rel="noopener noreferrer" class="btn-official-evidence" title="Open official text of Bharatiya Sakshya Adhiniyam, 2023 on India Code">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            <span>Official Statute (India Code)</span>
+                        </a>
+                    </section>
+
+                    <!-- Search and Filtering Section -->
+                    <section class="law-filter-card" aria-label="Search and Filter Law Database">
+                        <!-- Search Input Wrapper -->
+                        <div class="search-input-wrapper">
+                            <svg class="search-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="search" id="lawSearchInput" class="law-search-input" placeholder="Search sections, laws, offences, or keywords..." aria-label="Search cyber law provisions">
+                            <button type="button" id="btnClearSearch" class="btn-clear-search" aria-label="Clear search input">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                        </div>
+
+                        <!-- Filter Controls Row -->
+                        <div class="law-filter-controls">
+                            <div class="law-filter-item">
+                                <label for="filterActSelect" class="law-filter-label">Filter by Act / Legislation</label>
+                                <select id="filterActSelect" class="law-filter-select">
+                                    <option value="">All Acts (4 Legislations)</option>
+                                    <option value="Information Technology Act, 2000">Information Technology Act, 2000</option>
+                                    <option value="Bharatiya Nyaya Sanhita, 2023">Bharatiya Nyaya Sanhita, 2023</option>
+                                    <option value="Bharatiya Nagarik Suraksha Sanhita, 2023">Bharatiya Nagarik Suraksha Sanhita, 2023</option>
+                                    <option value="Bharatiya Sakshya Adhiniyam, 2023">Bharatiya Sakshya Adhiniyam, 2023</option>
+                                </select>
+                            </div>
+
+                            <div class="law-filter-item">
+                                <label for="filterCategorySelect" class="law-filter-label">Filter by Cybercrime Category</label>
+                                <select id="filterCategorySelect" class="law-filter-select">
+                                    <option value="">All Categories (10 Classifications)</option>
+                                    <option value="Unauthorized Access / Computer Offences">Unauthorized Access / Computer Offences</option>
+                                    <option value="Identity Theft">Identity Theft</option>
+                                    <option value="Online Cheating / Fraud">Online Cheating / Fraud</option>
+                                    <option value="Privacy / Data">Privacy / Data</option>
+                                    <option value="Obscenity / Electronic Content">Obscenity / Electronic Content</option>
+                                    <option value="Cyber Terrorism / Critical Systems">Cyber Terrorism / Critical Systems</option>
+                                    <option value="Electronic Evidence">Electronic Evidence</option>
+                                    <option value="Investigation / Procedure">Investigation / Procedure</option>
+                                    <option value="Forgery / False Electronic Records">Forgery / False Electronic Records</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="btnResetFilters" class="btn-reset-filters">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                                <span>Clear Filters</span>
+                            </button>
+                        </div>
+
+                        <!-- Results Toolbar -->
+                        <div class="law-results-bar">
+                            <div class="law-results-count" id="lawResultsCount">
+                                Showing <strong>33</strong> statutory provisions
+                            </div>
+                            <div class="law-results-hint">
+                                Tip: Click any row or &ldquo;Inspect&rdquo; to open the investigation dossier &amp; evidence prompts
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Reference Table -->
+                    <section class="law-table-card" aria-label="Section Reference Database">
+                        <div class="law-table-wrap">
+                            <table class="law-table" id="lawReferenceTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 140px;">Act</th>
+                                        <th style="width: 130px;">Section</th>
+                                        <th style="width: 260px;">Title</th>
+                                        <th style="width: 220px;">Category</th>
+                                        <th>Cybercrime Relevance</th>
+                                        <th style="width: 110px; text-align: right;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lawTableBody">
+                                    <!-- Rendered dynamically by js/police-cyber-laws.js -->
+                                </tbody>
+                            </table>
+
+                            <!-- Empty State Element -->
+                            <div class="law-empty-state" id="lawEmptyState" style="display: none;">
+                                <div class="empty-icon-wrap" aria-hidden="true">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                </div>
+                                <h3 class="empty-title">No matching statutory provisions found</h3>
+                                <p class="empty-desc">
+                                    No legal sections matched your current query or filter criteria. Try adjusting your search term, clearing category filters, or searching by Act name.
+                                </p>
+                                <button type="button" class="btn-clear-empty" onclick="document.getElementById('btnResetFilters').click();">
+                                    Reset All Filters
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Official Government Sources Reference Footer -->
+                    <footer style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="official-sources-card" aria-labelledby="officialSourcesHeading">
+                            <div class="sources-left">
+                                <div class="sources-title" id="officialSourcesHeading">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    <span>Official Reference Sources</span>
+                                </div>
+                                <p class="sources-subtitle">
+                                    Statutory texts compiled directly from gazetted Government of India repositories.
+                                </p>
+                            </div>
+
+                            <div class="sources-btn-row">
+                                <a href="https://www.indiacode.nic.in" target="_blank" rel="noopener noreferrer" class="btn-external-source">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                                    <span>India Code Repository</span>
+                                </a>
+
+                                <a href="https://www.meity.gov.in" target="_blank" rel="noopener noreferrer" class="btn-external-source">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                    <span>Ministry of Electronics &amp; IT (MeitY)</span>
+                                </a>
+
+                                <a href="https://egazette.gov.in" target="_blank" rel="noopener noreferrer" class="btn-external-source">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <span>The Gazette of India (eGazette)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="footer-legal-notice">
+                            <strong>Standard Notice:</strong> This digital interface provides searchable statutory text summaries for quick investigative reference by police personnel. It does not constitute legal advice, judicial pronouncement, or binding procedural instruction. Law enforcement officers must verify operative amendments, state notifications, and jurisdictional court decisions with their respective public prosecution branches before presenting charge sheets or legal applications.
+                        </div>
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Section Detail Slide-Over Modal / Dossier Drawer -->
+    <div class="law-modal-overlay" id="lawModalOverlay" role="dialog" aria-modal="true" aria-labelledby="dossierTitle">
+        <div class="law-dossier-drawer">
+            
+            <!-- Dossier Header -->
+            <div class="dossier-header">
+                <div class="dossier-title-cluster">
+                    <div class="dossier-meta-row">
+                        <span class="dossier-section-badge" id="dossierSectionBadge">Section --</span>
+                        <span class="act-pill-badge" id="dossierActPill">Act</span>
+                        <span class="cell-category-pill" id="dossierCategoryPill">Category</span>
+                    </div>
+
+                    <h2 class="dossier-title" id="dossierTitle">Section Title Placeholder</h2>
+                </div>
+
+                <button type="button" class="btn-close-dossier" id="closeLawModalBtn" aria-label="Close statutory dossier">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Dossier Action Bar -->
+            <div class="dossier-action-bar">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-official-external" id="btnOfficialLink">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Official Source (India Code)</span>
+                </a>
+
+                <button type="button" class="btn-copy-citation" id="btnCopyCitation">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span>Copy Citation</span>
+                </button>
+            </div>
+
+            <!-- Dossier Body Content -->
+            <div class="dossier-body">
+                
+                <!-- Historical Caution Alert (Active for Sec 66A) -->
+                <div class="historical-alert-box" id="dossierHistoricalAlert" style="display: none;">
+                    <strong>JUDICIAL DIRECTIVE: INOPERATIVE PROVISION</strong>
+                    <p style="margin: 4px 0 0 0;">
+                        Section 66A of the Information Technology Act was struck down by the Supreme Court of India in <em>Shreya Singhal v. Union of India (2015)</em> as unconstitutional. It is NOT a current operative offence and must NOT be applied or invoked in any FIR or police investigation.
+                    </p>
+                </div>
+
+                <!-- Statutory Summary Block -->
+                <div class="dossier-card">
+                    <h3 class="dossier-card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        <span>Statutory Summary</span>
+                    </h3>
+                    <p class="dossier-text-block" id="dossierSummaryBlock">
+                        <!-- Populated by JS -->
+                    </p>
+                </div>
+
+                <!-- Investigation Reference Section -->
+                <div class="dossier-card">
+                    <h3 class="dossier-card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                        <span>Investigation Reference</span>
+                    </h3>
+                    <p style="font-size: 13px; color: var(--text-secondary, #57606a); margin: 0 0 8px 0; font-style: italic;">
+                        Investigative prompts &mdash; may be relevant depending on the facts and applicable law:
+                    </p>
+
+                    <div class="investigation-prompt-list" id="dossierPromptsList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Evidence Considerations Block -->
+                <div class="dossier-card">
+                    <h3 class="dossier-card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span>Evidence Considerations</span>
+                    </h3>
+                    <p class="dossier-text-block" id="dossierEvidenceBlock">
+                        <!-- Populated by JS -->
+                    </p>
+                </div>
+
+                <!-- Related Categories Block -->
+                <div class="dossier-card">
+                    <h3 class="dossier-card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                        <span>Related Cybercrime Categories</span>
+                    </h3>
+                    <div class="categories-cluster" id="dossierCategoriesCluster">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Metadata Verification Footer -->
+                <div style="font-size: 12px; color: var(--text-tertiary, #6e7781); display: flex; justify-content: space-between; border-top: 1px solid var(--border-muted, #e1e4e8); padding-top: 12px;">
+                    <span>Source Verified via Official Gazette</span>
+                    <span id="dossierSourceDate">Last Reviewed: 2026-09-01</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/police-auth-check.js"></script>
+    <script src="js/police-cyber-laws.js"></script>
+</body>
+</html>

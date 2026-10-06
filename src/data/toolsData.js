@@ -63,50 +63,38 @@ export const TOOLS_DATA = [
   },
   {
     id: 'malware-scanner',
-    name: 'Script & Payload Inspector',
-    category: 'heuristics',
-    status: 'Operational',
-    statusVariant: 'success',
-    description: 'Perform static inspection of scripts, HTML, and batch payloads to detect obfuscated eval routines, base64 payloads, and process invocation hooks.',
-    capabilities: ['Eval & Exec Detection', 'Base64 Payload Flags', 'Process Spawn Detection'],
-    path: '/malware.html',
-    icon: 'FileWarning',
-    executionType: 'In-Memory Static Parsing'
-  },
-  {
-    id: 'privacy-analyzer',
-    name: 'Website Privacy & Telemetry Auditor',
-    category: 'web',
-    status: 'Operational',
-    statusVariant: 'success',
-    description: 'Evaluate web properties for tracking pixels, third-party advertising scripts, cookie persistence policies, and transport layer security.',
-    capabilities: ['Third-Party Script Audit', 'Cookie Retention Analysis', 'Transport Security'],
-    path: '/privacy-analyzer.html',
-    icon: 'EyeOff',
-    executionType: 'Telemetry Scanner'
-  },
-  {
-    id: 'image-metadata',
-    name: 'EXIF & Media Forensics',
+    name: 'Payload & Malware Scanner',
     category: 'forensics',
     status: 'Operational',
     statusVariant: 'success',
-    description: 'Extract exchangeable image file format (EXIF) metadata including camera sensor details, lens specifications, software timestamps, and embedded GPS tags.',
-    capabilities: ['Camera & Lens Tags', 'Embedded GPS Extraction', 'Timestamp Verification'],
-    path: '/image-metadata.html',
-    icon: 'Camera',
-    executionType: 'Binary Header Parser'
+    description: 'Inspect suspicious executables, scripts, documents, and archives using local SHA-256 cryptographic hashing and VirusTotal API v3 multi-engine intelligence.',
+    capabilities: ['Client SHA-256 Digest', 'Automatic VirusTotal Upload', 'Multi-Engine Verdict'],
+    path: '/tool-dashboard.html#payload-scanner',
+    icon: 'FileWarning',
+    executionType: 'Automatic VirusTotal v3'
   },
   {
-    id: 'user-ip-display',
-    name: 'Public IP & Geolocation Trace',
-    category: 'network',
+    id: 'privacy-analyzer',
+    name: 'Privacy Policy Auditor',
+    category: 'web',
     status: 'Operational',
     statusVariant: 'success',
-    description: 'Identify public routing IP address, verify Autonomous System Number (ASN), determine internet service provider routing, and plot location coordinates.',
-    capabilities: ['Public IPv4/IPv6', 'ISP & ASN Query', 'Geographic Coordinates'],
-    path: '/user-ip-display.html',
-    icon: 'Globe',
-    executionType: 'Network API & Map'
+    description: 'Analyze company privacy policies in plain language to reveal data collection, third-party sharing, advertising trackers, retention limits, and user deletion rights.',
+    capabilities: ['19-Category Policy Audit', 'Evidence & Excerpt Extraction', 'Transparency & Concern Scoring'],
+    path: '/tool-dashboard.html#privacy-auditor',
+    icon: 'FileText',
+    executionType: 'Citizen Language Analyzer'
+  },
+  {
+    id: 'image-metadata',
+    name: 'File Metadata Inspector',
+    category: 'forensics',
+    status: 'Operational',
+    statusVariant: 'success',
+    description: 'Inspect embedded metadata across images, documents, audio, and video files. Identify privacy risks and sanitize sensitive EXIF, GPS, and author tags locally.',
+    capabilities: ['Multi-Format Metadata Parser', 'GPS & Identity Risk Scoring', 'In-Browser Metadata Sanitizer'],
+    path: '/tool-dashboard.html#metadata',
+    icon: 'Camera',
+    executionType: 'Local Binary Parser'
   }
 ];

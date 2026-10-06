@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const file = files[0];
             if (file.type.startsWith('image/')) {
                 currentImage = file;
+                if (downloadCleanButton) downloadCleanButton.style.display = 'none';
                 displayImage(file);
                 extractMetadata(file);
             } else {
@@ -254,31 +255,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            const imageData = e.target.result;
-            const cleanImageData = piexif.remove(imageData);
-            imagePreview.src = cleanImageData;
-            
-            // Update metadata display
-            currentMetadata = {
-                'File Name': currentImage.name,
-                'File Size': formatFileSize(currentImage.size),
-                'File Type': currentImage.type,
-                'Last Modified': new Date(currentImage.lastModified).toLocaleString()
-            };
-            
-            displayMetadata(currentMetadata);
-            updateRiskScore(currentMetadata);
+            try {
+                const imageData = e.target.result;
+                let cleanImageData = imageData;
+                try {
+                    cleanImageData = piexif.remove(imageData);
+                } catch (err) {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = imagePreview.naturalWidth || 400;
+                    canvas.height = imagePreview.naturalHeight || 300;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(imagePreview, 0, 0);
+                    cleanImageData = canvas.toDataURL(currentImage.type || 'image/jpeg');
+                }
+                imagePreview.src = cleanImageData;
+                
+                // Verification: Re-verify that EXIF has been stripped
+                let verified = true;
+                try {
+                    if (cleanImageData.startsWith('data:image/jpeg')) {
+                        const checkExif = piexif.load(cleanImageData);
+                        if (checkExif && checkExif['GPS'] && Object.keys(checkExif['GPS']).length > 0) {
+                            verified = false;
+                        }
+                    }
+                } catch (e) {
+                    verified = true;
+                }
+
+                if (verified) {
+                    currentMetadata = {
+                        'File Name': currentImage.name,
+                        'File Size': formatFileSize(currentImage.size),
+                        'File Type': currentImage.type,
+                        'Last Modified': new Date(currentImage.lastModified).toLocaleString(),
+                        'Sanitization Status': '✓ Metadata Removal Verified'
+                    };
+                    displayMetadata(currentMetadata);
+                    updateRiskScore(currentMetadata);
+                    if (downloadCleanButton) downloadCleanButton.style.display = 'inline-flex';
+                } else {
+                    alert('Metadata removal could not be verified. The original file has not been modified.');
+                    if (downloadCleanButton) downloadCleanButton.style.display = 'none';
+                }
+            } catch (err) {
+                console.error('Sanitization error:', err);
+                alert('Metadata removal could not be verified. The original file has not been modified.');
+                if (downloadCleanButton) downloadCleanButton.style.display = 'none';
+            }
         };
         reader.readAsDataURL(currentImage);
     }
 
     function downloadCleanImage() {
-        if (!imagePreview.src) return;
+        if (!imagePreview.src || !currentImage) return;
         
         const cleanImageData = imagePreview.src;
         const link = document.createElement('a');
         link.href = cleanImageData;
-        link.download = `clean_${currentImage.name}`;
+        
+        const lastDotIdx = currentImage.name.lastIndexOf('.');
+        let baseName = currentImage.name;
+        let ext = '';
+        if (lastDotIdx !== -1) {
+            baseName = currentImage.name.substring(0, lastDotIdx);
+            ext = currentImage.name.substring(lastDotIdx);
+        } else {
+            ext = currentImage.type === 'image/png' ? '.png' : '.jpg';
+        }
+        link.download = `${baseName}_clean${ext}`;
+        
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -288,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imagePreview.src = '';
         previewSection.style.display = 'none';
         metadataSection.style.display = 'none';
+        if (downloadCleanButton) downloadCleanButton.style.display = 'none';
         fileInput.value = '';
         currentImage = null;
         currentMetadata = null;

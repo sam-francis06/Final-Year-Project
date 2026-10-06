@@ -24,6 +24,13 @@ import {
   X
 } from 'lucide-react';
 import { TOOL_CATEGORIES, TOOLS_DATA } from '../data/toolsData';
+import PhishingScannerView from '../components/PhishingScannerView';
+import PasswordAuditorView from '../components/PasswordAuditorView';
+import NetworkInspectorView from '../components/NetworkInspectorView';
+import SocialEngineeringDetectorView from '../components/SocialEngineeringDetectorView';
+import PayloadScannerView from '../components/PayloadScannerView';
+import PrivacyAuditorView from '../components/PrivacyAuditorView';
+import FileMetadataInspectorView from '../components/FileMetadataInspectorView';
 
 // Map icon string names to Lucide icon components
 const ICON_MAP = {
@@ -38,12 +45,115 @@ const ICON_MAP = {
 };
 
 export default function ToolDashboard() {
+  const getInitialView = () => {
+    if (typeof window === 'undefined') return 'modules';
+    const hash = (window.location.hash || '').toLowerCase();
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolParam = (urlParams.get('tool') || urlParams.get('module') || '').toLowerCase();
+
+    if (
+      hash === '#privacy-auditor' || hash === '#privacy' || hash === '#privacy-analyzer' ||
+      toolParam === 'privacy' || toolParam === 'privacy-auditor' || toolParam === 'privacy-analyzer'
+    ) return 'privacy';
+    if (
+      hash === '#metadata' || hash === '#file-metadata' || hash === '#image-metadata' || hash === '#exif' ||
+      toolParam === 'metadata' || toolParam === 'file-metadata' || toolParam === 'image-metadata' || toolParam === 'exif'
+    ) return 'metadata';
+    if (
+      hash === '#payload-scanner' || hash === '#payload' || hash === '#malware-scanner' || hash === '#malware' ||
+      toolParam === 'payload' || toolParam === 'payload-scanner' || toolParam === 'malware' || toolParam === 'malware-scanner'
+    ) return 'payload';
+    if (
+      hash === '#phishing-scanner' || hash === '#phishing' || hash === '#phishing-detection' ||
+      toolParam === 'phishing' || toolParam === 'phishing-scanner'
+    ) return 'phishing';
+    if (
+      hash === '#password-auditor' || hash === '#password' || hash === '#password-checker' ||
+      toolParam === 'password' || toolParam === 'password-checker'
+    ) return 'password';
+    if (
+      hash === '#network-inspector' || hash === '#network' || hash === '#wifi-security' ||
+      toolParam === 'network' || toolParam === 'wifi' || toolParam === 'wifi-security'
+    ) return 'network';
+    if (
+      hash === '#social-engineering' || hash === '#social' ||
+      toolParam === 'social' || toolParam === 'social-engineering'
+    ) return 'social';
+    return 'modules';
+  };
+
+  const [activeView, setActiveView] = useState(getInitialView);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [theme, setTheme] = useState('light');
   const [reportCount, setReportCount] = useState(0);
   const [userName, setUserName] = useState('Citizen');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const navigateToView = (viewName) => {
+    setActiveView(viewName);
+    setIsSidebarOpen(false);
+    if (typeof window !== 'undefined') {
+      if (viewName === 'modules') {
+        if (window.location.hash) {
+          try {
+            history.pushState(null, '', window.location.pathname + window.location.search);
+          } catch {
+            window.location.hash = '';
+          }
+        }
+      } else if (viewName === 'privacy') {
+        window.location.hash = 'privacy-auditor';
+      } else if (viewName === 'metadata') {
+        window.location.hash = 'metadata';
+      } else if (viewName === 'payload') {
+        window.location.hash = 'payload-scanner';
+      } else if (viewName === 'phishing') {
+        window.location.hash = 'phishing-scanner';
+      } else if (viewName === 'password') {
+        window.location.hash = 'password-auditor';
+      } else if (viewName === 'network') {
+        window.location.hash = 'network-inspector';
+      } else if (viewName === 'social') {
+        window.location.hash = 'social-engineering';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Synchronize active view when URL hash changes (deep links, browser back/forward)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = (window.location.hash || '').toLowerCase();
+      if (hash === '#privacy-auditor' || hash === '#privacy' || hash === '#privacy-analyzer') {
+        setActiveView('privacy');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#metadata' || hash === '#file-metadata' || hash === '#image-metadata' || hash === '#exif') {
+        setActiveView('metadata');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#payload-scanner' || hash === '#payload' || hash === '#malware-scanner' || hash === '#malware') {
+        setActiveView('payload');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#phishing-scanner' || hash === '#phishing' || hash === '#phishing-detection') {
+        setActiveView('phishing');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#password-auditor' || hash === '#password' || hash === '#password-checker') {
+        setActiveView('password');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#network-inspector' || hash === '#network' || hash === '#wifi-security') {
+        setActiveView('network');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#social-engineering' || hash === '#social') {
+        setActiveView('social');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (!hash || hash === '#modules') {
+        setActiveView('modules');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Initialize theme and user state from localStorage
   useEffect(() => {
@@ -123,8 +233,19 @@ export default function ToolDashboard() {
 
         <nav className="header-nav" aria-label="Console Navigation">
           <a href="/dashboard.html" className="nav-item">Overview</a>
-          <a href="/tool-dashboard.html" className="nav-item active">Security Modules</a>
-          <a href="/reports.html" className="nav-item">Incident Logs</a>
+          <a
+            href="/tool-dashboard.html"
+            className={`nav-item ${activeView === 'modules' ? 'active' : ''}`}
+            onClick={(e) => {
+              if (activeView !== 'modules') {
+                e.preventDefault();
+                navigateToView('modules');
+              }
+            }}
+          >
+            Security Modules
+          </a>
+          <a href="/incident-logs.html" className="nav-item">Incident Logs</a>
           <a href="/user-cyber-laws.html" className="nav-item">Statutory Laws</a>
         </nav>
 
@@ -195,7 +316,14 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/tool-dashboard.html" className="sidebar-link active">
+                <a
+                  href="/tool-dashboard.html"
+                  className={`sidebar-link ${activeView === 'modules' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('modules');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <Layers size={18} />
                     <span>Security Modules</span>
@@ -203,11 +331,12 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/reports.html" className="sidebar-link">
+                <a href="/incident-logs.html" className="sidebar-link">
                   <span className="sidebar-link-content">
                     <FileText size={18} />
                     <span>Incident Logs</span>
                   </span>
+                  {reportCount > 0 && <span className="sidebar-count-badge">{reportCount}</span>}
                 </a>
               </li>
               <li>
@@ -221,24 +350,23 @@ export default function ToolDashboard() {
             </ul>
           </div>
 
-          <div>
+          <div className="sidebar-operations-section">
             <div className="sidebar-label">Operations</div>
             <ul className="sidebar-menu">
               <li>
-                <a href="/dashboard.html" className="sidebar-link">
-                  <span className="sidebar-link-content">
-                    <Activity size={18} />
-                    <span>System Status</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="/tool-dashboard.html" className="sidebar-link active">
+                <a
+                  href="/tool-dashboard.html"
+                  className={`sidebar-link ${activeView === 'modules' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('modules');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <Layers size={18} />
                     <span>Security Modules</span>
                   </span>
-                  <span className="sidebar-count-badge">8</span>
+                  <span className="sidebar-count-badge">{TOOLS_DATA.length}</span>
                 </a>
               </li>
             </ul>
@@ -248,7 +376,14 @@ export default function ToolDashboard() {
             <div className="sidebar-label">Threat Inspection</div>
             <ul className="sidebar-menu">
               <li>
-                <a href="/phishing-detection.html" className="sidebar-link">
+                <a
+                  href="#phishing-scanner"
+                  className={`sidebar-link ${activeView === 'phishing' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('phishing');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <ShieldAlert size={18} />
                     <span>Phishing Scanner</span>
@@ -256,7 +391,14 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/password-checker.html" className="sidebar-link">
+                <a
+                  href="#password-auditor"
+                  className={`sidebar-link ${activeView === 'password' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('password');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <KeyRound size={18} />
                     <span>Password Auditor</span>
@@ -264,7 +406,14 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/wifi-security.html" className="sidebar-link">
+                <a
+                  href="#network-inspector"
+                  className={`sidebar-link ${activeView === 'network' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('network');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <Wifi size={18} />
                     <span>Network Inspector</span>
@@ -272,7 +421,14 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/social-engineering.html" className="sidebar-link">
+                <a
+                  href="#social-engineering"
+                  className={`sidebar-link ${activeView === 'social' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('social');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <Brain size={18} />
                     <span>Social Engineering</span>
@@ -286,7 +442,14 @@ export default function ToolDashboard() {
             <div className="sidebar-label">Digital Forensics</div>
             <ul className="sidebar-menu">
               <li>
-                <a href="/malware.html" className="sidebar-link">
+                <a
+                  href="#payload-scanner"
+                  className={`sidebar-link ${activeView === 'payload' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('payload');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <FileWarning size={18} />
                     <span>Payload Scanner</span>
@@ -294,7 +457,14 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/privacy-analyzer.html" className="sidebar-link">
+                <a
+                  href="#privacy-auditor"
+                  className={`sidebar-link ${activeView === 'privacy' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('privacy');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <EyeOff size={18} />
                     <span>Privacy Auditor</span>
@@ -302,18 +472,17 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/image-metadata.html" className="sidebar-link">
+                <a
+                  href="#metadata"
+                  className={`sidebar-link ${activeView === 'metadata' ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToView('metadata');
+                  }}
+                >
                   <span className="sidebar-link-content">
                     <Camera size={18} />
-                    <span>EXIF Extractor</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="/user-ip-display.html" className="sidebar-link">
-                  <span className="sidebar-link-content">
-                    <Globe size={18} />
-                    <span>IP Geolocation</span>
+                    <span>File Metadata Inspector</span>
                   </span>
                 </a>
               </li>
@@ -332,7 +501,7 @@ export default function ToolDashboard() {
                 </a>
               </li>
               <li>
-                <a href="/reports.html" className="sidebar-link">
+                <a href="/incident-logs.html" className="sidebar-link">
                   <span className="sidebar-link-content">
                     <FileText size={18} />
                     <span>Incident Reports</span>
@@ -348,7 +517,23 @@ export default function ToolDashboard() {
 
         {/* Center Main Worksurface */}
         <main className="console-main">
-          {/* Section Heading & Contextual Actions */}
+          {activeView === 'phishing' ? (
+            <PhishingScannerView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'password' ? (
+            <PasswordAuditorView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'network' ? (
+            <NetworkInspectorView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'social' ? (
+            <SocialEngineeringDetectorView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'payload' ? (
+            <PayloadScannerView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'privacy' ? (
+            <PrivacyAuditorView onBack={() => navigateToView('modules')} />
+          ) : activeView === 'metadata' ? (
+            <FileMetadataInspectorView onBack={() => navigateToView('modules')} />
+          ) : (
+            <>
+              {/* Section Heading & Contextual Actions */}
           <div className="console-title-row">
             <div className="title-meta">
               <h1>Individual Security Console</h1>
@@ -359,7 +544,7 @@ export default function ToolDashboard() {
                 <Scale size={16} />
                 <span>Statutory Reference</span>
               </a>
-              <a href="/reports.html" className="btn-primary">
+              <a href="/incident-logs.html" className="btn-primary">
                 <FileText size={16} />
                 <span>File Incident Report</span>
               </a>
@@ -371,7 +556,7 @@ export default function ToolDashboard() {
             <div className="telemetry-card">
               <div className="telemetry-info">
                 <span className="telemetry-label">Active Modules</span>
-                <span className="telemetry-metric">8 of 8</span>
+                <span className="telemetry-metric">{TOOLS_DATA.length} of {TOOLS_DATA.length}</span>
                 <span className="telemetry-subtext">Client sandboxed</span>
               </div>
               <div className="telemetry-icon-box">
@@ -480,10 +665,82 @@ export default function ToolDashboard() {
                       <span>{tool.executionType}</span>
                     </span>
 
-                    <a href={tool.path} className="open-tool-btn">
-                      <span>Launch Module</span>
-                      <ExternalLink size={14} />
-                    </a>
+                    {tool.id === 'phishing-detection' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('phishing')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'password-checker' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('password')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'wifi-security' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('network')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'social-engineering' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('social')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'malware-scanner' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('payload')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'privacy-analyzer' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('privacy')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : tool.id === 'image-metadata' || tool.id === 'metadata' || tool.id === 'file-metadata' ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToView('metadata')}
+                        className="open-tool-btn"
+                        style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                      >
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </button>
+                    ) : (
+                      <a href={tool.path} className="open-tool-btn">
+                        <span>Launch Module</span>
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
                 </article>
               );
@@ -505,7 +762,7 @@ export default function ToolDashboard() {
               <p>Submit a formal digital complaint with structured evidence under provisions of the Indian IT Act.</p>
             </div>
             <div className="incident-banner-actions">
-              <a href="/reports.html" className="btn-primary">
+              <a href="/incident-logs.html" className="btn-primary">
                 File Incident Report
               </a>
               <a href="/user-cyber-laws.html" className="btn-secondary">
@@ -513,6 +770,8 @@ export default function ToolDashboard() {
               </a>
             </div>
           </section>
+            </>
+          )}
         </main>
       </div>
     </div>

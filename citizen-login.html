@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="shield.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Citizen Portal Authentication | Cyber Council</title>
+  <meta name="description" content="Access cybersecurity tools, report cyber incidents, and stay informed about digital safety on the CyberCouncil Citizen Portal." />
+  <link rel="stylesheet" href="css/citizen-login.css" />
+</head>
+
+<body>
+  <!-- Top Navigation Header -->
+  <header class="auth-nav">
+    <div class="auth-nav-content">
+      <a href="index.html" class="nav-logo" title="Back to CyberCouncil Home">
+        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <span>Cyber Council</span>
+      </a>
+
+      <div class="nav-right-cluster">
+        <a href="index.html" class="back-home-link">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          <span>Home</span>
+        </a>
+
+        <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Auth Page Content -->
+  <main class="auth-page-main">
+    <div class="auth-card-container">
+      <div class="auth-card">
+        <!-- Card Header Branding -->
+        <div class="auth-card-header">
+          <div class="auth-badge-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <h1>Citizen Portal</h1>
+          <p>Access cybersecurity tools, report cyber incidents, and stay informed about digital safety.</p>
+        </div>
+
+        <!-- Authentication Tabs (Login vs Sign Up) -->
+        <div class="auth-tabs" role="tablist" aria-label="Citizen Authentication Modes">
+          <button type="button" class="tab-btn active" id="tabLogin" role="tab" aria-selected="true" aria-controls="loginPanel">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+            <span>Login</span>
+          </button>
+          <button type="button" class="tab-btn" id="tabSignup" role="tab" aria-selected="false" aria-controls="signupPanel">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="8.5" cy="7" r="4" />
+              <line x1="20" y1="8" x2="20" y2="14" />
+              <line x1="23" y1="11" x2="17" y2="11" />
+            </svg>
+            <span>Sign Up</span>
+          </button>
+        </div>
+
+        <!-- ========================================================
+             PANEL 1: LOGIN FORM
+             ======================================================== -->
+        <div class="auth-form-panel active" id="loginPanel" role="tabpanel" aria-labelledby="tabLogin">
+          <!-- Demo Credentials Helper Box -->
+          <div class="demo-account-box">
+            <div class="demo-account-info">
+              <div class="demo-account-tag">
+                <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                <span>Demo Login</span>
+              </div>
+              <div class="demo-creds-text">citizen@cybercouncil.org</div>
+              <div class="demo-creds-text">Password: Citizen@2025</div>
+            </div>
+            <button type="button" class="quick-fill-btn" id="quickFillBtn" title="Fill demo credentials into form">
+              Use Demo Account
+            </button>
+          </div>
+
+          <form id="loginForm" novalidate>
+            <!-- Email Address Field -->
+            <div class="form-group">
+              <label for="loginEmail" class="form-label">Email Address</label>
+              <div class="input-wrapper">
+                <input
+                  type="email"
+                  id="loginEmail"
+                  name="email"
+                  class="form-input"
+                  placeholder="name@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="field-error" id="loginEmailError" role="alert"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="loginPassword" class="form-label">Password</label>
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="password"
+                  class="form-input has-toggle"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle-btn"
+                  id="toggleLoginPasswordBtn"
+                  aria-label="Show password"
+                  data-target="loginPassword"
+                >
+                  <!-- Eye Icon (hidden = show password) -->
+                  <svg class="eye-open" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <!-- Eye Off Icon -->
+                  <svg class="eye-closed" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display: none;">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+              <div class="field-error" id="loginPasswordError" role="alert"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="auth-submit-btn" id="loginSubmitBtn">
+              <span>Login</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+
+            <!-- Inline Form Status Alert -->
+            <div class="form-status-alert" id="loginStatusAlert" role="alert"></div>
+          </form>
+        </div>
+
+        <!-- ========================================================
+             PANEL 2: SIGN UP FORM
+             ======================================================== -->
+        <div class="auth-form-panel" id="signupPanel" role="tabpanel" aria-labelledby="tabSignup">
+          <form id="signupForm" novalidate>
+            <!-- Full Name Field -->
+            <div class="form-group">
+              <label for="signupFullName" class="form-label">Full Name</label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="signupFullName"
+                  name="fullName"
+                  class="form-input"
+                  placeholder="e.g. Ananya Sharma"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="field-error" id="signupFullNameError" role="alert"></div>
+            </div>
+
+            <!-- Email Address Field -->
+            <div class="form-group">
+              <label for="signupEmail" class="form-label">Email Address</label>
+              <div class="input-wrapper">
+                <input
+                  type="email"
+                  id="signupEmail"
+                  name="email"
+                  class="form-input"
+                  placeholder="name@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="field-error" id="signupEmailError" role="alert"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="signupPassword" class="form-label">Password</label>
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="signupPassword"
+                  name="password"
+                  class="form-input has-toggle"
+                  placeholder="Minimum 6 characters"
+                  autocomplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle-btn"
+                  id="toggleSignupPasswordBtn"
+                  aria-label="Show password"
+                  data-target="signupPassword"
+                >
+                  <svg class="eye-open" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <svg class="eye-closed" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display: none;">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+              <div class="field-error" id="signupPasswordError" role="alert"></div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+              <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="signupConfirmPassword"
+                  name="confirmPassword"
+                  class="form-input has-toggle"
+                  placeholder="Re-enter password"
+                  autocomplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle-btn"
+                  id="toggleSignupConfirmBtn"
+                  aria-label="Show password"
+                  data-target="signupConfirmPassword"
+                >
+                  <svg class="eye-open" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <svg class="eye-closed" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display: none;">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+              <div class="field-error" id="signupConfirmPasswordError" role="alert"></div>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-group terms-group">
+              <label class="checkbox-label" for="signupTerms">
+                <input type="checkbox" id="signupTerms" name="terms" required />
+                <span>
+                  I agree to the CyberCouncil <a href="#termsModal" class="legal-link" id="openTermsLink">Terms</a> and <a href="#privacyModal" class="legal-link" id="openPrivacyLink">Privacy Policy</a>.
+                </span>
+              </label>
+              <div class="field-error" id="signupTermsError" role="alert"></div>
+            </div>
+
+            <!-- Create Account Button -->
+            <button type="submit" class="auth-submit-btn" id="signupSubmitBtn">
+              <span>Create Account</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="8.5" cy="7" r="4" />
+                <line x1="20" y1="8" x2="20" y2="14" />
+                <line x1="23" y1="11" x2="17" y2="11" />
+              </svg>
+            </button>
+
+            <!-- Inline Form Status Alert -->
+            <div class="form-status-alert" id="signupStatusAlert" role="alert"></div>
+          </form>
+        </div>
+
+        <!-- Demo Environment Notice (Section 11) -->
+        <div class="demo-environment-notice">
+          <div class="demo-notice-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </div>
+          <div class="demo-notice-text">
+            <strong>Demo Environment</strong> — Account authentication is currently handled client-side for presentation purposes. Secure backend authentication and database integration will be implemented in the next development phase.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Police Portal Switcher -->
+      <div class="police-switch-link">
+        Authorized police officer? <a href="police-login.html">Police Department Login &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Legal Modal (Terms & Privacy) -->
+  <div class="legal-modal" id="legalModal" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
+    <div class="legal-modal-card">
+      <h3 id="legalModalTitle">CyberCouncil Terms &amp; Privacy</h3>
+      <p>
+        CyberCouncil is an educational and public awareness cybersecurity initiative. In this evaluation release:
+      </p>
+      <p>
+        1. <strong>Privacy:</strong> We never transmit, store, or sell personal passwords or sensitive data on remote servers. All credential checks on this page run strictly client-side.
+      </p>
+      <p>
+        2. <strong>Ethical Use:</strong> Tools such as phishing scanners and file metadata viewers are designed solely for self-defense, educational auditing, and authorized digital safety verification.
+      </p>
+      <p>
+        3. <strong>Incident Reporting:</strong> Incident records generated within the platform are held in localized browser state during evaluation and are not submitted to live police databases.
+      </p>
+      <button type="button" class="legal-modal-close-btn" id="closeLegalModalBtn">Understood</button>
+    </div>
+  </div>
+
+  <!-- Client-Side Demo Authentication Logic -->
+  <script>
+    (function () {
+      // ----------------------------------------------------------------------
+      // 1. Theme Toggle Management
+      // ----------------------------------------------------------------------
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const html = document.documentElement;
+
+      const updateThemeIcon = (theme) => {
+        if (theme === 'dark') {
+          themeIcon.innerHTML =
+            '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+        } else {
+          themeIcon.innerHTML =
+            '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        }
+      };
+
+      const initialTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', initialTheme);
+      updateThemeIcon(initialTheme);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const currentTheme = html.getAttribute('data-theme');
+          const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', nextTheme);
+          localStorage.setItem('theme', nextTheme);
+          updateThemeIcon(nextTheme);
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // 2. Tab Switching (Login <-> Sign Up)
+      // ----------------------------------------------------------------------
+      const tabLogin = document.getElementById('tabLogin');
+      const tabSignup = document.getElementById('tabSignup');
+      const loginPanel = document.getElementById('loginPanel');
+      const signupPanel = document.getElementById('signupPanel');
+
+      const clearAllErrors = () => {
+        document.querySelectorAll('.field-error').forEach((el) => {
+          el.textContent = '';
+          el.classList.remove('visible');
+        });
+        document.querySelectorAll('.form-input').forEach((el) => {
+          el.classList.remove('has-error');
+        });
+        const loginAlert = document.getElementById('loginStatusAlert');
+        const signupAlert = document.getElementById('signupStatusAlert');
+        if (loginAlert) {
+          loginAlert.textContent = '';
+          loginAlert.className = 'form-status-alert';
+        }
+        if (signupAlert) {
+          signupAlert.textContent = '';
+          signupAlert.className = 'form-status-alert';
+        }
+      };
+
+      const switchToTab = (target) => {
+        clearAllErrors();
+        if (target === 'login') {
+          tabLogin.classList.add('active');
+          tabLogin.setAttribute('aria-selected', 'true');
+          tabSignup.classList.remove('active');
+          tabSignup.setAttribute('aria-selected', 'false');
+          loginPanel.classList.add('active');
+          signupPanel.classList.remove('active');
+          document.getElementById('loginEmail')?.focus();
+        } else {
+          tabSignup.classList.add('active');
+          tabSignup.setAttribute('aria-selected', 'true');
+          tabLogin.classList.remove('active');
+          tabLogin.setAttribute('aria-selected', 'false');
+          signupPanel.classList.add('active');
+          loginPanel.classList.remove('active');
+          document.getElementById('signupFullName')?.focus();
+        }
+      };
+
+      tabLogin.addEventListener('click', () => switchToTab('login'));
+      tabSignup.addEventListener('click', () => switchToTab('signup'));
+
+      // ----------------------------------------------------------------------
+      // 3. Password Visibility Toggles
+      // ----------------------------------------------------------------------
+      document.querySelectorAll('.password-toggle-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+
+          const openEye = btn.querySelector('.eye-open');
+          const closedEye = btn.querySelector('.eye-closed');
+
+          if (isPassword) {
+            btn.setAttribute('aria-label', 'Hide password');
+            if (openEye) openEye.style.display = 'none';
+            if (closedEye) closedEye.style.display = 'block';
+          } else {
+            btn.setAttribute('aria-label', 'Show password');
+            if (openEye) openEye.style.display = 'block';
+            if (closedEye) closedEye.style.display = 'none';
+          }
+        });
+      });
+
+      // ----------------------------------------------------------------------
+      // 4. In-Memory Demo Accounts (No Plaintext Passwords in LocalStorage!)
+      // ----------------------------------------------------------------------
+      const DEMO_CITIZEN = {
+        email: 'citizen@cybercouncil.org',
+        password: 'Citizen@2025',
+        fullName: 'Citizen User',
+      };
+
+      // In-memory store for newly registered accounts in this session
+      const registeredDemoUsers = new Map();
+      registeredDemoUsers.set(DEMO_CITIZEN.email.toLowerCase(), DEMO_CITIZEN);
+
+      // Quick Fill Demo Credentials button
+      const quickFillBtn = document.getElementById('quickFillBtn');
+      if (quickFillBtn) {
+        quickFillBtn.addEventListener('click', () => {
+          const emailInput = document.getElementById('loginEmail');
+          const passInput = document.getElementById('loginPassword');
+          if (emailInput && passInput) {
+            emailInput.value = DEMO_CITIZEN.email;
+            passInput.value = DEMO_CITIZEN.password;
+            emailInput.classList.remove('has-error');
+            passInput.classList.remove('has-error');
+            const emailErr = document.getElementById('loginEmailError');
+            const passErr = document.getElementById('loginPasswordError');
+            if (emailErr) emailErr.classList.remove('visible');
+            if (passErr) passErr.classList.remove('visible');
+          }
+        });
+      }
+
+      // Helper: Email format validator
+      const isValidEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      };
+
+      // Helper: Display field error
+      const setFieldError = (inputId, errorId, message) => {
+        const input = document.getElementById(inputId);
+        const err = document.getElementById(errorId);
+        if (input && err) {
+          input.classList.add('has-error');
+          err.innerHTML =
+            `<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>${message}</span>`;
+          err.classList.add('visible');
+        }
+      };
+
+      const clearFieldError = (inputId, errorId) => {
+        const input = document.getElementById(inputId);
+        const err = document.getElementById(errorId);
+        if (input) input.classList.remove('has-error');
+        if (err) {
+          err.textContent = '';
+          err.classList.remove('visible');
+        }
+      };
+
+      // Attach clear on input
+      ['loginEmail', 'loginPassword', 'signupFullName', 'signupEmail', 'signupPassword', 'signupConfirmPassword'].forEach((id) => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.addEventListener('input', () => {
+            clearFieldError(id, `${id}Error`);
+            const alert = id.startsWith('login')
+              ? document.getElementById('loginStatusAlert')
+              : document.getElementById('signupStatusAlert');
+            if (alert && alert.classList.contains('error')) {
+              alert.style.display = 'none';
+            }
+          });
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // 5. Login Form Submission Handler
+      // ----------------------------------------------------------------------
+      const loginForm = document.getElementById('loginForm');
+      const loginStatusAlert = document.getElementById('loginStatusAlert');
+      const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          clearAllErrors();
+
+          const emailInput = document.getElementById('loginEmail');
+          const passwordInput = document.getElementById('loginPassword');
+
+          const email = (emailInput?.value || '').trim();
+          const password = passwordInput?.value || '';
+
+          let hasError = false;
+
+          // Email validation
+          if (!email) {
+            setFieldError('loginEmail', 'loginEmailError', 'Email address is required.');
+            hasError = true;
+          } else if (!isValidEmail(email)) {
+            setFieldError('loginEmail', 'loginEmailError', 'Please enter a valid email address.');
+            hasError = true;
+          }
+
+          // Password validation
+          if (!password) {
+            setFieldError('loginPassword', 'loginPasswordError', 'Password is required.');
+            hasError = true;
+          } else if (password.length < 6) {
+            setFieldError('loginPassword', 'loginPasswordError', 'Password must contain at least 6 characters.');
+            hasError = true;
+          }
+
+          if (hasError) return;
+
+          // Check credentials against demo users
+          const normalizedEmail = email.toLowerCase();
+          const matchedUser = registeredDemoUsers.get(normalizedEmail);
+
+          if (!matchedUser || matchedUser.password !== password) {
+            // Section 8: "Invalid email or password." Do not reveal which was wrong.
+            loginStatusAlert.textContent = 'Invalid email or password.';
+            loginStatusAlert.className = 'form-status-alert error';
+            return;
+          }
+
+          // Success flow (Section 7)
+          loginSubmitBtn.disabled = true;
+          loginStatusAlert.textContent = 'Verifying credentials...';
+          loginStatusAlert.className = 'form-status-alert loading';
+
+          setTimeout(() => {
+            loginStatusAlert.textContent = 'Login successful. Redirecting to Citizen Console...';
+            loginStatusAlert.className = 'form-status-alert success';
+
+            // Store user session name/email (never store password in localStorage)
+            try {
+              localStorage.setItem('email', matchedUser.email);
+              localStorage.setItem('fullname', matchedUser.fullName);
+              sessionStorage.setItem('citizen_logged_in', 'true');
+            } catch (err) {
+              console.warn('Storage unavailable:', err);
+            }
+
+            // Redirect to existing Citizen Dashboard
+            setTimeout(() => {
+              window.location.href = 'dashboard.html';
+            }, 600);
+          }, 450);
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // 6. Sign Up Form Submission Handler
+      // ----------------------------------------------------------------------
+      const signupForm = document.getElementById('signupForm');
+      const signupStatusAlert = document.getElementById('signupStatusAlert');
+      const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+
+      if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          clearAllErrors();
+
+          const fullNameInput = document.getElementById('signupFullName');
+          const emailInput = document.getElementById('signupEmail');
+          const passwordInput = document.getElementById('signupPassword');
+          const confirmPasswordInput = document.getElementById('signupConfirmPassword');
+          const termsInput = document.getElementById('signupTerms');
+
+          const fullName = (fullNameInput?.value || '').trim();
+          const email = (emailInput?.value || '').trim();
+          const password = passwordInput?.value || '';
+          const confirmPassword = confirmPasswordInput?.value || '';
+          const termsAgreed = termsInput ? termsInput.checked : false;
+
+          let hasError = false;
+
+          // Full Name Validation
+          if (!fullName) {
+            setFieldError('signupFullName', 'signupFullNameError', 'Full name is required.');
+            hasError = true;
+          } else if (fullName.length < 2) {
+            setFieldError('signupFullName', 'signupFullNameError', 'Full name must contain at least 2 characters.');
+            hasError = true;
+          }
+
+          // Email Validation
+          if (!email) {
+            setFieldError('signupEmail', 'signupEmailError', 'Email address is required.');
+            hasError = true;
+          } else if (!isValidEmail(email)) {
+            setFieldError('signupEmail', 'signupEmailError', 'Please enter a valid email address.');
+            hasError = true;
+          }
+
+          // Password Validation
+          if (!password) {
+            setFieldError('signupPassword', 'signupPasswordError', 'Password must contain at least 6 characters.');
+            hasError = true;
+          } else if (password.length < 6) {
+            setFieldError('signupPassword', 'signupPasswordError', 'Password must contain at least 6 characters.');
+            hasError = true;
+          }
+
+          // Confirm Password Validation
+          if (!confirmPassword) {
+            setFieldError('signupConfirmPassword', 'signupConfirmPasswordError', 'Please confirm your password.');
+            hasError = true;
+          } else if (confirmPassword !== password) {
+            setFieldError('signupConfirmPassword', 'signupConfirmPasswordError', 'Passwords do not match.');
+            hasError = true;
+          }
+
+          // Terms Validation (Section 5)
+          if (!termsAgreed) {
+            const termsErr = document.getElementById('signupTermsError');
+            if (termsErr) {
+              termsErr.innerHTML =
+                '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Please accept the Terms and Privacy Policy to continue.</span>';
+              termsErr.classList.add('visible');
+            }
+            hasError = true;
+          }
+
+          if (hasError) return;
+
+          // Register in-memory demo user
+          signupSubmitBtn.disabled = true;
+          signupStatusAlert.textContent = 'Creating citizen profile...';
+          signupStatusAlert.className = 'form-status-alert loading';
+
+          setTimeout(() => {
+            const normalizedEmail = email.toLowerCase();
+            registeredDemoUsers.set(normalizedEmail, {
+              email,
+              password,
+              fullName,
+            });
+
+            signupStatusAlert.textContent = 'Account created successfully. You can now log in.';
+            signupStatusAlert.className = 'form-status-alert success';
+
+            // Auto-switch to Login form after brief delay
+            setTimeout(() => {
+              signupForm.reset();
+              signupSubmitBtn.disabled = false;
+              switchToTab('login');
+
+              // Pre-fill email and focus password
+              const loginEmail = document.getElementById('loginEmail');
+              const loginPassword = document.getElementById('loginPassword');
+              if (loginEmail) loginEmail.value = email;
+              if (loginPassword) loginPassword.focus();
+
+              loginStatusAlert.textContent = 'Account created successfully. Please enter your password to log in.';
+              loginStatusAlert.className = 'form-status-alert success';
+            }, 800);
+          }, 450);
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // 7. Terms & Privacy Modal Handlers
+      // ----------------------------------------------------------------------
+      const legalModal = document.getElementById('legalModal');
+      const openTermsLink = document.getElementById('openTermsLink');
+      const openPrivacyLink = document.getElementById('openPrivacyLink');
+      const closeLegalModalBtn = document.getElementById('closeLegalModalBtn');
+
+      const openModal = (e) => {
+        e.preventDefault();
+        if (legalModal) legalModal.classList.add('open');
+      };
+
+      const closeModal = () => {
+        if (legalModal) legalModal.classList.remove('open');
+      };
+
+      if (openTermsLink) openTermsLink.addEventListener('click', openModal);
+      if (openPrivacyLink) openPrivacyLink.addEventListener('click', openModal);
+      if (closeLegalModalBtn) closeLegalModalBtn.addEventListener('click', closeModal);
+
+      if (legalModal) {
+        legalModal.addEventListener('click', (e) => {
+          if (e.target === legalModal) closeModal();
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>

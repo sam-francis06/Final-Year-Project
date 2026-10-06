@@ -6,25 +6,27 @@ document.addEventListener('DOMContentLoaded', function() {
       'police-tool-dashboard',
       'case-management',
       'cyber-laws.html',
+      'police-cyber-laws',
       'police-profile.html',
       'file-hash-generator',
       'file-metadata-analyzer',
       'file-type-validator',
       'metadata',
+      'image-metadata-viewer',
       'url-status-checker',
-      'user-ip-display',
       'username-lookup',
       'police-dashboard.html',
       'police-tool-dashboard.html',
       'case-management.html',
       'cyber-laws.html',
+      'police-cyber-laws.html',
       'police-profile.html',
       'file-hash-generator.html',
       'file-metadata-analyzer.html',
       'file-type-validator.html',
       'metadata.html',
+      'image-metadata-viewer.html',
       'url-status-checker.html',
-      'user-ip-display.html',
       'username-lookup.html'
     ];
     
@@ -34,11 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isProtectedPage) {
       // Check for police_userid in localStorage
-      const policeUserId = localStorage.getItem('police_userid');
+      let policeUserId = localStorage.getItem('police_userid');
       if (!policeUserId) {
-        // Not logged in, redirect to police login page
-        window.location.href = 'police-login.html';
+        // Automatically provide demo officer access in local development environment
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          policeUserId = 'DEMO-OFFICER';
+          localStorage.setItem('police_userid', policeUserId);
+        } else {
+          // Not logged in, redirect to police login page
+          window.location.href = 'police-login.html';
+          return;
+        }
       }
-      // else, user is authenticated, allow access
+      // user is authenticated, allow access
     }
   });
